@@ -12,7 +12,7 @@ BarterDEX is a decentralized cryptocurrency exchange using atomic swaps to trade
 
 Whitepaper `explaining the protocol`_
 
-.. _explaining the protocol: https://github.com/KomodoPlatform/KomodoPlatform/wiki/barterDEX-Whitepaper-v2
+.. _explaining the protocol: :ref:`whitepaper`
 
 .. toctree::
    :maxdepth: 2
