@@ -30,7 +30,19 @@ Why are multiple UTXOs needed?
 
 BarterDEX is an UTXO based exchange. This means that 1 UTXO is exchanged for 1 other UTXO. For example: 1 KMD UTXO with a value of 32 KMD is traded for 1 BCH UTXO with a value of 0.5 BCH.
 
-The atomic swap protocol
+Why can't I claim my expired 0-conf deposit?
+--------------------------------------------
+
+This is due to avoid bad actors stealing the deposit, and depends on the time you made a deposit. Funds are available 3 - 10 days after the expiration of the number of weeks you defined when making the deposit.
+
+.. code-block:: c
+   
+   timestamp = (uint32_t) time(NULL);
+       timestamp /= LP_WEEKMULT;
+       timestamp += weeks + 2;
+       timestamp *= LP_WEEKMULT;
+
+
 
 .. _Unspent Transaction Output: http://learnmeabitcoin.com/glossary/utxo 
 
