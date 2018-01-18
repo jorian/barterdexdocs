@@ -20,6 +20,9 @@ Whitepaper `explaining the protocol`_
    :maxdepth: 2
 
    faq
+   getting_started
+   guides
+   api
 
 Indices and tables
 ==================
