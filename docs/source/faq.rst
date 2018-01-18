@@ -21,7 +21,7 @@ so if you deposit 10 KMD you get 10 zcredits, if i'm not mistaken
 What are UTXOs?
 ---------------
 
-UTXO stands for `Unspent Transaction Output`_. BarterDEX trades UTXOs, not balances. This makes trading different than on a centralized exchange. Because of the atomic swap protocol, UTXOs must have certain sizes to be eligible for a trade. 
+UTXO stands for `Unspent Transaction Output`_. BarterDEX trades UTXOs, not balances. This makes trading different from trading on a centralized exchange. Because of the atomic swap protocol, UTXOs must have certain sizes to be eligible for a trade. 
 
 Basically this means that you need to make at least 3 transactions to your smartaddress to be able to trade. These transactions should have sizes X, X * 1.2 and X * 0.1. 
 
