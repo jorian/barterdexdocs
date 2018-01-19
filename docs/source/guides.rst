@@ -14,8 +14,10 @@ start <coin>-qt from CLI and add -rescan
 How to build BarterDEX from source
 ----------------------------------
 
-How to use the Barterdex CLI
-----------------------------
+How to use Barterdex using CLI
+------------------------------
+
+- escape characters in passphrase
 
 How to become a Liquidity Provider
 ----------------------------------
