@@ -96,5 +96,11 @@ UIS   Unitus
 
 All the `Komodo Platform assetchains`_
 
+What are the differences between BarterDEX and BlockNET DX?
+-----------------------------------------------------------
+
+What are the differences between BarterDEX and Altcoin.io?
+----------------------------------------------------------
+
 .. _Komodo Platform assetchains: https://www.komodoplatform.com/en/blog/komodo-smart-contracts-assetchains-and-geckochains
 

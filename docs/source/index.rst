@@ -12,23 +12,24 @@ Todo
 - Decentralized orderbooks
 - Decentralized ordermatching
 
+* :ref:`user-docs`
+* :ref:`developer`
+
+.. _user-docs:
+
 .. toctree::
    :maxdepth: 2
+   :caption: User documentation
 
    faq
    getting_started
    guides
 
+.. _developer:
+
 .. toctree::
    :maxdepth: 1
    :caption: Developer
 
-   whitepaper
    api
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   whitepaper
