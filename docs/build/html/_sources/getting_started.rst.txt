@@ -1,0 +1,23 @@
+Getting Started with BarterDEX
+==============================
+
+What you need to know before using BarterDEX
+--------------------------------------------
+
+differences between BarterDEX and a centralized exchange
+coin confirmation times
+
+UTXO trading: 2+ deposits minimum in order to trade.
+account for network fees
+Total balance is sum of utxos. 
+change gets back into smartaddress, creating a new UTXO.
+
+alice and bob, which payments need to happen in order to atomically swap
+
+buying an order (mini auction story)
+request takes at least 60 seconds
+
+
+How does the decentralized orderbook work, p2p etc. not always uptodate
+
+
