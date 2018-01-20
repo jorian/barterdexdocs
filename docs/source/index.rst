@@ -18,15 +18,13 @@ Todo
    faq
    getting_started
    guides
-   api
-
-Other
------
 
 .. toctree::
    :maxdepth: 1
+   :caption: Developer
 
    whitepaper
+   api
 
 Indices and tables
 ==================
