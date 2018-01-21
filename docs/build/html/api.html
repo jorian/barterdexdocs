@@ -38,6 +38,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="BarterDEX 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Whitepaper" href="whitepaper.html"/>
         <link rel="prev" title="Guides" href="guides.html"/> 
 
   
@@ -91,11 +92,34 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">User documentation</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with BarterDEX</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides.html">Guides</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API docs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-marketmaker">Starting marketmaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trade-commands">Trade commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#autoprice">autoprice</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fixed-price">fixed price</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#price-with-margin">price with margin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#price-based-on-external-data">price based on external data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utxo-tools">UTXO tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#withdraw">withdraw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sendrawtransaction">sendrawtransaction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whitepaper.html">Whitepaper</a></li>
 </ul>
 
             
@@ -161,7 +185,100 @@
             
   <div class="section" id="api-docs">
 <h1>API docs<a class="headerlink" href="#api-docs" title="Permalink to this headline">¶</a></h1>
-<p>This will list all API commands available in BarterDEX</p>
+<p>WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK IN PROGRESS!</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>BarterDEX commands are called using RPC. If you installed BarterDEX by following the &lt;INSERT LINK TO THAT GUIDE HERE&gt; CLI manual installation guide, you’ll have a lot of these commands ready to use in the <code class="docutils literal"><span class="pre">~/SuperNET/iguana/dexscripts</span></code> folder. These API docs will explain what each command does and what the possible arguments for each method are.</p>
+<p>You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value.</p>
+<p>Curl can be used to send commands, see the following example taken from the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">source</span> userpass
+curl --url <span class="s2">&quot;http://127.0.0.1:7783&quot;</span> --data <span class="s2">&quot;{\&quot;userpass\&quot;:\&quot;</span><span class="nv">$userpass</span><span class="s2">\&quot;,\&quot;method\&quot;:\&quot;autoprice\&quot;,\&quot;base\&quot;:\&quot;KMD\&quot;,\&quot;rel\&quot;:\&quot;BTC\&quot;,\&quot;margin\&quot;:0.0001}&quot;</span>
+</pre></div>
+</div>
+<p>The userpass is sourced from the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder, so that file has to be created in the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder prior to sending a command. The userpass is there to prevent bad actors from issuing RPC commands. Marketmaker will not work without it set.
+Each command to BarterDEX will need this userpass value as value of the <code class="docutils literal"><span class="pre">userpass</span></code> key in the JSON.
+<code class="docutils literal"><span class="pre">127.0.0.1:7783</span></code> is the ip address and port where BarterDEX is listening for commands.</p>
+<p>The json code in all the methods below is the data that is needed for each method described (mind the escape characters when using shell). For example:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span><span class="s2">&quot;$userpass&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;margin&quot;</span><span class="p">:</span><span class="mf">0.0001</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-marketmaker">
+<h2>Starting marketmaker<a class="headerlink" href="#starting-marketmaker" title="Permalink to this headline">¶</a></h2>
+<p>There are two different nodes in BarterDEX: a full relay node and a node that doesn’t relay. In the dexscripts folder, these are started by ./run or ./client, respectively. Normally, only Liquidity Providers will prefer a full relay node, as they can respond to incoming requests one hop sooner. Others will use ./client, since it doesn’t require as much bandwidth as a full relay node.</p>
+<p>A full relay node is started with the following command:</p>
+</div>
+<div class="section" id="trade-commands">
+<h2>Trade commands<a class="headerlink" href="#trade-commands" title="Permalink to this headline">¶</a></h2>
+<p>Most of the commands use the base/rel notation of pricing orders.</p>
+<div class="section" id="autoprice">
+<h3>autoprice<a class="headerlink" href="#autoprice" title="Permalink to this headline">¶</a></h3>
+<p>The autoprice command is a rich command that allows anyone to create an order using data from CoinMarketCap or any other exchange. It refreshes the price every 1-2 minutes, such that once the autoprice command is executed, the order will be in the orderbooks permanently.</p>
+<p>There are several possibilities for autoprice:</p>
+<div class="section" id="fixed-price">
+<h4>fixed price<a class="headerlink" href="#fixed-price" title="Permalink to this headline">¶</a></h4>
+<p>The following command puts an ask in the BTC/KMD orderbook and basically says: ‘I want to get KMD by selling BTC at a fixed price of 1800’. So, anyone who wants to buy BTC with KMD will see this order and can buy 1 BTC for 1800 KMD.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span><span class="s2">&quot;$userpass&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;fixed&quot;</span><span class="p">:</span><span class="mi">1800</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="price-with-margin">
+<h4>price with margin<a class="headerlink" href="#price-with-margin" title="Permalink to this headline">¶</a></h4>
+<p>&lt;NEED TO ASK WHAT THIS DOES EXACTLY&gt;</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span><span class="s2">&quot;$userpass&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;margin&quot;</span><span class="p">:</span><span class="mf">0.01</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="price-based-on-external-data">
+<h4>price based on external data<a class="headerlink" href="#price-based-on-external-data" title="Permalink to this headline">¶</a></h4>
+<p>The following command would refresh the price of the order in the orderbook based on price changes as defined in the <code class="docutils literal"><span class="pre">refrel</span></code> argument:</p>
+<p>&lt;NEED MORE INFO&gt;</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span><span class="s2">&quot;$userpass&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;margin&quot;</span><span class="p">:</span><span class="mf">0.05</span><span class="p">,</span>
+     <span class="nt">&quot;refbase&quot;</span><span class="p">:</span><span class="s2">&quot;kmd&quot;</span>
+     <span class="s2">&quot;refrel&quot;</span><span class="p">:</span><span class="s2">&quot;coinmarketcap&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the base and rel need to be uppercase and the refbase needs to be lowercase</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="utxo-tools">
+<h2>UTXO tools<a class="headerlink" href="#utxo-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="withdraw">
+<h3>withdraw<a class="headerlink" href="#withdraw" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="sendrawtransaction">
+<h3>sendrawtransaction<a class="headerlink" href="#sendrawtransaction" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
 </div>
 
 
@@ -173,6 +290,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="whitepaper.html" class="btn btn-neutral float-right" title="Whitepaper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="guides.html" class="btn btn-neutral" title="Guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

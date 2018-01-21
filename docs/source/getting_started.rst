@@ -20,4 +20,8 @@ request takes at least 60 seconds
 
 How does the decentralized orderbook work, p2p etc. not always uptodate
 
+setting up the native wallet + .conf file -> for each coin?
+
+
+
 
