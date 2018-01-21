@@ -46,27 +46,50 @@ This is due to avoid bad actors stealing the deposit, and depends on the time yo
 
 .. _Unspent Transaction Output: http://learnmeabitcoin.com/glossary/utxo 
 
+Who are alice and bob?
+----------------------
+
+In BarterDEX terms, alice is the one who initiates a trade. She buys an order from bob, who already put up an order in the orderbook. It is like saying bob has a marketstand with something to sell and alice walks up to the stand to buy something.
+
+Is it free to cancel an order?
+------------------------------
+
+Yes. Placing orders and sending a request doesn't cost you anything. Only when your request has found a willing trade partner and a connection has been established, you will start paying the dexfee.
+
+How much are the fees?
+----------------------
+
+Fees for using the exchange exist in paying a dexfee, to be paid by alice (the one initiating the trade), also called the maker fee. This is about 0.15% of the alicepayment - the amount you're sending to the other party.
+
+There are no taker fees.
+
+You also pay the standard transaction fees, for sending the payment to the other party.
+
+The dexfees are collected and once a significant amount of fees are collected, the fees are paid as dividend to the DEX assetholders, which is also tradeable on BarterDEX.
+
+
 Currently supported coins
 -------------------------
 
-===== ============
-Coin  Name
-===== ============
-BTC   Bitcoin
-LTC   Litecoin
-KMD   Komodo
-BTG   Bitcoin Gold
-BCH   Bitcoin Cash
-ZEC   Zcash
-VTC   VertCoin
-DOGE  DogeCoin
-HUSH  Hush
-DGB   DigiByte
-XMCC  Monoeci
-BTCH  Bitcoin Hush
-CRC   CrowdCoin
-VOT   VoteCoin
-INN   Innova
+===== ============ ======== ================ ====
+Coin  Name         Asset    Name/description Info
+===== ============ ======== ================ ====
+BTC   Bitcoin      REVS     Revenue Shares
+LTC   Litecoin     SUPERNET Supernet / Unity
+KMD   Komodo       DEX      InstantDEX
+BTG   Bitcoin Gold PANGEA   Pangea Poker
+BCH   Bitcoin Cash JUMBLR   JUMBLR           https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/
+ZEC   Zcash        BET      BET Platform
+VTC   VertCoin     CRYPTO   CRYPTO777        https://nxtforum.org/consensus-research/crypto777/
+DOGE  DogeCoin     HODL     HODL
+HUSH  Hush         MSHARK   MSHARK
+GRS   GroestlCoin  BOTS     Tradebots
+DGB   DigiByte     COQUI    Coqui
+XMCC  Monoeci      WLC      WirelessCoin
+BTCH  Bitcoin Hush KV       Key-Value
+CRC   CrowdCoin    CEAL     CEAL
+VOT   VoteCoin     MESH     MESH
+INN   Innova       ETOMIC   Ether swaps
 MOON  MoonCoin
 CRW   Crown
 EFL   eGulden
@@ -92,7 +115,7 @@ GLT   Global Token
 ZER   Zero
 HODLC HOdlcoin
 UIS   Unitus
-===== ============
+===== ============ ======== ================ ====
 
 All the `Komodo Platform assetchains`_
 
@@ -101,6 +124,11 @@ What are the differences between BarterDEX and BlockNET DX?
 
 What are the differences between BarterDEX and Altcoin.io?
 ----------------------------------------------------------
+
+Can I privately swap coins with another person?
+-----------------------------------------------
+
+Yes, that possibility exists, but for now it's only done using the Command Line. See the guide in our Guides section explaining what needs to be done.
 
 .. _Komodo Platform assetchains: https://www.komodoplatform.com/en/blog/komodo-smart-contracts-assetchains-and-geckochains
 

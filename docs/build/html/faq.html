@@ -92,16 +92,21 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">User documentation</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-is-an-atomic-swap">What is an atomic swap?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-zcredits">What are Zcredits?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-utxos">What are UTXOs?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-are-multiple-utxos-needed">Why are multiple UTXOs needed?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#why-can-t-i-claim-my-expired-0-conf-deposit">Why can’t I claim my expired 0-conf deposit?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#who-are-alice-and-bob">Who are alice and bob?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-it-free-to-cancel-an-order">Is it free to cancel an order?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-much-are-the-fees">How much are the fees?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#currently-supported-coins">Currently supported coins</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-the-differences-between-barterdex-and-blocknet-dx">What are the differences between BarterDEX and BlockNET DX?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-the-differences-between-barterdex-and-altcoin-io">What are the differences between BarterDEX and Altcoin.io?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#can-i-privately-swap-coins-with-another-person">Can I privately swap coins with another person?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with BarterDEX</a></li>
@@ -109,8 +114,8 @@
 </ul>
 <p class="caption"><span class="caption-text">Developer</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="whitepaper.html">Whitepaper</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whitepaper.html">Whitepaper</a></li>
 </ul>
 
             
@@ -207,138 +212,285 @@ so if you deposit 10 KMD you get 10 zcredits, if i’m not mistaken</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="who-are-alice-and-bob">
+<h2>Who are alice and bob?<a class="headerlink" href="#who-are-alice-and-bob" title="Permalink to this headline">¶</a></h2>
+<p>In BarterDEX terms, alice is the one who initiates a trade. She buys an order from bob, who already put up an order in the orderbook. It is like saying bob has a marketstand with something to sell and alice walks up to the stand to buy something.</p>
+</div>
+<div class="section" id="is-it-free-to-cancel-an-order">
+<h2>Is it free to cancel an order?<a class="headerlink" href="#is-it-free-to-cancel-an-order" title="Permalink to this headline">¶</a></h2>
+<p>Yes. Placing orders and sending a request doesn’t cost you anything. Only when your request has found a willing trade partner and a connection has been established, you will start paying the dexfee.</p>
+</div>
+<div class="section" id="how-much-are-the-fees">
+<h2>How much are the fees?<a class="headerlink" href="#how-much-are-the-fees" title="Permalink to this headline">¶</a></h2>
+<p>Fees for using the exchange exist in paying a dexfee, to be paid by alice (the one initiating the trade), also called the maker fee. This is about 0.15% of the alicepayment - the amount you’re sending to the other party.</p>
+<p>There are no taker fees.</p>
+<p>You also pay the standard transaction fees, for sending the payment to the other party.</p>
+<p>The dexfees are collected and once a significant amount of fees are collected, the fees are paid as dividend to the DEX assetholders, which is also tradeable on BarterDEX.</p>
+</div>
 <div class="section" id="currently-supported-coins">
 <h2>Currently supported coins<a class="headerlink" href="#currently-supported-coins" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="29%" />
-<col width="71%" />
+<col width="3%" />
+<col width="8%" />
+<col width="5%" />
+<col width="10%" />
+<col width="74%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Coin</th>
 <th class="head">Name</th>
+<th class="head">Asset</th>
+<th class="head">Name/description</th>
+<th class="head">Info</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>BTC</td>
 <td>Bitcoin</td>
+<td>REVS</td>
+<td>Revenue Shares</td>
+<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>LTC</td>
 <td>Litecoin</td>
+<td>SUPERNET</td>
+<td>Supernet / Unity</td>
+<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>KMD</td>
 <td>Komodo</td>
+<td>DEX</td>
+<td>InstantDEX</td>
+<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>BTG</td>
 <td>Bitcoin Gold</td>
+<td>PANGEA</td>
+<td>Pangea Poker</td>
+<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>BCH</td>
 <td>Bitcoin Cash</td>
+<td>JUMBLR</td>
+<td>JUMBLR</td>
+<td><a class="reference external" href="https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/">https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/</a></td>
 </tr>
 <tr class="row-odd"><td>ZEC</td>
 <td>Zcash</td>
+<td>BET</td>
+<td>BET Platform</td>
+<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>VTC</td>
 <td>VertCoin</td>
+<td>CRYPTO</td>
+<td>CRYPTO777</td>
+<td><a class="reference external" href="https://nxtforum.org/consensus-research/crypto777/">https://nxtforum.org/consensus-research/crypto777/</a></td>
 </tr>
 <tr class="row-odd"><td>DOGE</td>
 <td>DogeCoin</td>
+<td>HODL</td>
+<td>HODL</td>
+<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>HUSH</td>
 <td>Hush</td>
+<td>MSHARK</td>
+<td>MSHARK</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>DGB</td>
+<tr class="row-odd"><td>GRS</td>
+<td>GroestlCoin</td>
+<td>BOTS</td>
+<td>Tradebots</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>DGB</td>
 <td>DigiByte</td>
+<td>COQUI</td>
+<td>Coqui</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>XMCC</td>
+<tr class="row-odd"><td>XMCC</td>
 <td>Monoeci</td>
+<td>WLC</td>
+<td>WirelessCoin</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>BTCH</td>
+<tr class="row-even"><td>BTCH</td>
 <td>Bitcoin Hush</td>
+<td>KV</td>
+<td>Key-Value</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>CRC</td>
+<tr class="row-odd"><td>CRC</td>
 <td>CrowdCoin</td>
+<td>CEAL</td>
+<td>CEAL</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>VOT</td>
+<tr class="row-even"><td>VOT</td>
 <td>VoteCoin</td>
+<td>MESH</td>
+<td>MESH</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>INN</td>
+<tr class="row-odd"><td>INN</td>
 <td>Innova</td>
+<td>ETOMIC</td>
+<td>Ether swaps</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>MOON</td>
+<tr class="row-even"><td>MOON</td>
 <td>MoonCoin</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>CRW</td>
+<tr class="row-odd"><td>CRW</td>
 <td>Crown</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>EFL</td>
+<tr class="row-even"><td>EFL</td>
 <td>eGulden</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>GBX</td>
+<tr class="row-odd"><td>GBX</td>
 <td>GoByte</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>BCO</td>
+<tr class="row-even"><td>BCO</td>
 <td>BridgeCoin</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>BLK</td>
+<tr class="row-odd"><td>BLK</td>
 <td>BlackCoin</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>ABY</td>
+<tr class="row-even"><td>ABY</td>
 <td>Applebyte</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>STAK</td>
+<tr class="row-odd"><td>STAK</td>
 <td>Straks</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>XZC</td>
+<tr class="row-even"><td>XZC</td>
 <td>Zcoin</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>QTUM</td>
+<tr class="row-odd"><td>QTUM</td>
 <td>QTUM</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>PURA</td>
+<tr class="row-even"><td>PURA</td>
 <td>PURA</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>DSR</td>
+<tr class="row-odd"><td>DSR</td>
 <td>Desire</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>MNZ</td>
+<tr class="row-even"><td>MNZ</td>
 <td>Monaize</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>BTCZ</td>
+<tr class="row-odd"><td>BTCZ</td>
 <td>Bitcoin Z</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>MAGA</td>
+<tr class="row-even"><td>MAGA</td>
 <td>MagaCoin</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>BSD</td>
+<tr class="row-odd"><td>BSD</td>
 <td>Bitsend</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>IOP</td>
+<tr class="row-even"><td>IOP</td>
 <td>IoP</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>BLOCK</td>
+<tr class="row-odd"><td>BLOCK</td>
 <td>BlockNET DX</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>CHIPS</td>
+<tr class="row-even"><td>CHIPS</td>
 <td>CHIPS</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>888</td>
+<tr class="row-odd"><td>888</td>
 <td>OctoCoin</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>ARG</td>
+<tr class="row-even"><td>ARG</td>
 <td>Argentum</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>GLT</td>
+<tr class="row-odd"><td>GLT</td>
 <td>Global Token</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>ZER</td>
+<tr class="row-even"><td>ZER</td>
 <td>Zero</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-even"><td>HODLC</td>
+<tr class="row-odd"><td>HODLC</td>
 <td>HOdlcoin</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
-<tr class="row-odd"><td>UIS</td>
+<tr class="row-even"><td>UIS</td>
 <td>Unitus</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
 </tr>
 </tbody>
 </table>
@@ -349,6 +501,10 @@ so if you deposit 10 KMD you get 10 zcredits, if i’m not mistaken</p>
 </div>
 <div class="section" id="what-are-the-differences-between-barterdex-and-altcoin-io">
 <h2>What are the differences between BarterDEX and Altcoin.io?<a class="headerlink" href="#what-are-the-differences-between-barterdex-and-altcoin-io" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="can-i-privately-swap-coins-with-another-person">
+<h2>Can I privately swap coins with another person?<a class="headerlink" href="#can-i-privately-swap-coins-with-another-person" title="Permalink to this headline">¶</a></h2>
+<p>Yes, that possibility exists, but for now it’s only done using the Command Line. See the guide in our Guides section explaining what needs to be done.</p>
 </div>
 </div>
 

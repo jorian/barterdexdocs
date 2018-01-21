@@ -92,7 +92,8 @@
               
             
             
-              <ul class="current">
+              <p class="caption"><span class="caption-text">User documentation</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with BarterDEX</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Guides</a><ul>
@@ -100,12 +101,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#how-to-build-barterdex-from-source">How to build BarterDEX from source</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-use-barterdex-using-cli">How to use Barterdex using CLI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-become-a-liquidity-provider">How to become a Liquidity Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-create-a-new-barterdex-trading-network">How to create a new BarterDEX trading network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-claim-a-0-conf-deposit-manually">How to claim a 0-conf deposit manually</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API docs</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Developer</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API docs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="whitepaper.html">Whitepaper</a></li>
 </ul>
 
@@ -192,6 +195,14 @@ start &lt;coin&gt;-qt from CLI and add -rescan</p>
 </div>
 <div class="section" id="how-to-become-a-liquidity-provider">
 <h2>How to become a Liquidity Provider<a class="headerlink" href="#how-to-become-a-liquidity-provider" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="how-to-create-a-new-barterdex-trading-network">
+<h2>How to create a new BarterDEX trading network<a class="headerlink" href="#how-to-create-a-new-barterdex-trading-network" title="Permalink to this headline">¶</a></h2>
+<p>Since BarterDEX is a peer-to-peer network, seeded by some ip-addresses to create the network, others can create a BarterDEX network of their own. This enables people to trade within a private group of traders, or to trade directly from person to person.</p>
+<p>Creating your own BarterDEX trade network is as easy as adding 1 command:
+the only difference is how you launch the marketmaker -  by adding 2 arguments:</p>
+<p>“netid”:2,”seednode”:”5.9.253.204”</p>
+<p>to the startup command, where netid can be anything up to 14420, and the seednode is the ip address of the node initializing the network. Participants of this network would have to start marketmaker with the same arguments.</p>
 </div>
 <div class="section" id="how-to-claim-a-0-conf-deposit-manually">
 <h2>How to claim a 0-conf deposit manually<a class="headerlink" href="#how-to-claim-a-0-conf-deposit-manually" title="Permalink to this headline">¶</a></h2>
