@@ -99,7 +99,7 @@ The following command would refresh the price of the order in the orderbook base
    	"base":"KMD",
    	"rel":"BTC",
    	"margin":0.05,
-	"refbase":"kmd"
+	"refbase":"kmd",
 	"refrel":"coinmarketcap"
    }
 

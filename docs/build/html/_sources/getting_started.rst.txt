@@ -22,6 +22,21 @@ How does the decentralized orderbook work, p2p etc. not always uptodate
 
 setting up the native wallet + .conf file -> for each coin?
 
+Windows
+-------
+
+Download and setup
+^^^^^^^^^^^^^^^^^^
+
+Download the `latest version of BarterDEX`_
+
+.. _latest version of BarterDEX: https://github.com/KomodoPlatform/BarterDEX/releases
+
+.. image:: _static/images/github_release.png
+   :align: center
+
+Create a folder on your desktop and drag the win64 folder in it:
+
 
 
 
