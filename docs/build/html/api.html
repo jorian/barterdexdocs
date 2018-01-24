@@ -102,7 +102,11 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API docs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#starting-marketmaker">Starting marketmaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-marketmaker">Starting marketmaker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#startup-arguments">Startup arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-or-private-network">New or private network</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#trade-commands">Trade commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#autoprice">autoprice</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#fixed-price">fixed price</a></li>
@@ -188,8 +192,8 @@
 <p>WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK IN PROGRESS!</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>BarterDEX commands are called using RPC. If you installed BarterDEX by following the &lt;INSERT LINK TO THAT GUIDE HERE&gt; CLI manual installation guide, you’ll have a lot of these commands ready to use in the <code class="docutils literal"><span class="pre">~/SuperNET/iguana/dexscripts</span></code> folder. These API docs will explain what each command does and what the possible arguments for each method are.</p>
-<p>You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value.</p>
+<p>BarterDEX commands are called using Remote Procedure Calls (RPC). If you installed BarterDEX by following the &lt;INSERT LINK TO THAT GUIDE HERE&gt; CLI manual installation guide, you’ll have a lot of these commands ready to use in the <code class="docutils literal"><span class="pre">~/SuperNET/iguana/dexscripts</span></code> folder. These API docs will explain what each command does and what the possible arguments for each method are.</p>
+<p>You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your device (see below).</p>
 <p>Curl can be used to send commands, see the following example taken from the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder:</p>
 <div class="highlight-shell"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nb">source</span> userpass
@@ -197,8 +201,8 @@ curl --url <span class="s2">&quot;http://127.0.0.1:7783&quot;</span> --data <spa
 </pre></div>
 </div>
 <p>The userpass is sourced from the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder, so that file has to be created in the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder prior to sending a command. The userpass is there to prevent bad actors from issuing RPC commands. Marketmaker will not work without it set.
-Each command to BarterDEX will need this userpass value as value of the <code class="docutils literal"><span class="pre">userpass</span></code> key in the JSON.
-<code class="docutils literal"><span class="pre">127.0.0.1:7783</span></code> is the ip address and port where BarterDEX is listening for commands.</p>
+Each command to BarterDEX will need this userpass value as value of the <code class="docutils literal"><span class="pre">userpass</span></code> key in the JSON.</p>
+<p><code class="docutils literal"><span class="pre">127.0.0.1:7783</span></code> is the ip address and port where BarterDEX is listening for commands.</p>
 <p>The json code in all the methods below is the data that is needed for each method described (mind the escape characters when using shell). For example:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
      <span class="nt">&quot;userpass&quot;</span><span class="p">:</span><span class="s2">&quot;$userpass&quot;</span><span class="p">,</span>
@@ -212,8 +216,26 @@ Each command to BarterDEX will need this userpass value as value of the <code cl
 </div>
 <div class="section" id="starting-marketmaker">
 <h2>Starting marketmaker<a class="headerlink" href="#starting-marketmaker" title="Permalink to this headline">¶</a></h2>
-<p>There are two different nodes in BarterDEX: a full relay node and a node that doesn’t relay. In the dexscripts folder, these are started by ./run or ./client, respectively. Normally, only Liquidity Providers will prefer a full relay node, as they can respond to incoming requests one hop sooner. Others will use ./client, since it doesn’t require as much bandwidth as a full relay node.</p>
-<p>A full relay node is started with the following command:</p>
+<p>There are two different nodes in BarterDEX: a full relay node and a node that doesn’t relay. In the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder, these are started by <code class="docutils literal"><span class="pre">./run</span></code> or <code class="docutils literal"><span class="pre">./client</span></code>, respectively. Normally, only Liquidity Providers will prefer a full relay node, as they can respond to incoming requests one hop sooner. Others will use <code class="docutils literal"><span class="pre">./client</span></code>, since it doesn’t require as much bandwidth as a full relay node and can therefore be perfect for regular users, ie. traders on BarterDEX.</p>
+<div class="section" id="startup-arguments">
+<h3>Startup arguments<a class="headerlink" href="#startup-arguments" title="Permalink to this headline">¶</a></h3>
+<p>A full relay node is started by running marketmaker with the following arguments string:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;gui&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;name of gui&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;profitmargin&quot;</span><span class="p">:</span><span class="mf">0.01</span><span class="p">,</span>
+     <span class="nt">&quot;userhome&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;userhome + /&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;passphrase&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;passphrase&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;coins&quot;</span><span class="p">:[</span><span class="s2">&quot;&lt;coins&gt;&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">gui</span></code> is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI.</p>
+<p><code class="docutils literal"><span class="pre">profitmargin</span></code> is the default profitmargin that this full relay node (or Liquidity Provider node) will use when placing orders in orderbooks using the <code class="docutils literal"><span class="pre">autoprice</span></code> method.</p>
+</div>
+<div class="section" id="new-or-private-network">
+<h3>New or private network<a class="headerlink" href="#new-or-private-network" title="Permalink to this headline">¶</a></h3>
+<p>In order to start a network other than the default network, you need to add 2 arguments to the marketmaker startup arguments. When initiating a new network, a full relay node must be used, and it has to define <code class="docutils literal"><span class="pre">&quot;netid&quot;:&lt;int</span> <span class="pre">netid&gt;</span></code> and <code class="docutils literal"><span class="pre">&quot;seednode&quot;:&quot;&lt;ipaddress&gt;&quot;</span></code> to the marketmaker startup arguments, where the netid is any integer higher than 0 but lower than 14420. The seednode is the ip address of the server being a full relay node.</p>
+</div>
 </div>
 <div class="section" id="trade-commands">
 <h2>Trade commands<a class="headerlink" href="#trade-commands" title="Permalink to this headline">¶</a></h2>

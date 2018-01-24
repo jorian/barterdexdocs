@@ -6,9 +6,9 @@ WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK I
 Introduction
 ------------
 
-BarterDEX commands are called using RPC. If you installed BarterDEX by following the <INSERT LINK TO THAT GUIDE HERE> CLI manual installation guide, you'll have a lot of these commands ready to use in the ``~/SuperNET/iguana/dexscripts`` folder. These API docs will explain what each command does and what the possible arguments for each method are.
+BarterDEX commands are called using Remote Procedure Calls (RPC). If you installed BarterDEX by following the <INSERT LINK TO THAT GUIDE HERE> CLI manual installation guide, you'll have a lot of these commands ready to use in the ``~/SuperNET/iguana/dexscripts`` folder. These API docs will explain what each command does and what the possible arguments for each method are.
 
-You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value. 
+You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your device (see below).
 
 Curl can be used to send commands, see the following example taken from the ``dexscripts`` folder:
 
@@ -20,6 +20,7 @@ Curl can be used to send commands, see the following example taken from the ``de
 
 The userpass is sourced from the ``dexscripts`` folder, so that file has to be created in the ``dexscripts`` folder prior to sending a command. The userpass is there to prevent bad actors from issuing RPC commands. Marketmaker will not work without it set. 
 Each command to BarterDEX will need this userpass value as value of the ``userpass`` key in the JSON.
+
 ``127.0.0.1:7783`` is the ip address and port where BarterDEX is listening for commands.
 
 The json code in all the methods below is the data that is needed for each method described (mind the escape characters when using shell). For example:
@@ -38,9 +39,32 @@ The json code in all the methods below is the data that is needed for each metho
 Starting marketmaker
 --------------------
 
-There are two different nodes in BarterDEX: a full relay node and a node that doesn't relay. In the dexscripts folder, these are started by ./run or ./client, respectively. Normally, only Liquidity Providers will prefer a full relay node, as they can respond to incoming requests one hop sooner. Others will use ./client, since it doesn't require as much bandwidth as a full relay node.
+There are two different nodes in BarterDEX: a full relay node and a node that doesn't relay. In the ``dexscripts`` folder, these are started by ``./run`` or ``./client``, respectively. Normally, only Liquidity Providers will prefer a full relay node, as they can respond to incoming requests one hop sooner. Others will use ``./client``, since it doesn't require as much bandwidth as a full relay node and can therefore be perfect for regular users, ie. traders on BarterDEX.
 
-A full relay node is started with the following command:
+Startup arguments
+^^^^^^^^^^^^^^^^^
+
+A full relay node is started by running marketmaker with the following arguments string:
+
+.. code-block:: json
+
+   {
+	"gui":"<name of gui>", 
+	"profitmargin":0.01,
+	"userhome":"<userhome + />",  
+	"passphrase":"<passphrase>", 
+	"coins":["<coins>"] 
+   }
+
+``gui`` is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI.
+
+``profitmargin`` is the default profitmargin that this full relay node (or Liquidity Provider node) will use when placing orders in orderbooks using the ``autoprice`` method.
+
+New or private network
+^^^^^^^^^^^^^^^^^^^^^^
+
+In order to start a network other than the default network, you need to add 2 arguments to the marketmaker startup arguments. When initiating a new network, a full relay node must be used, and it has to define ``"netid":<int netid>`` and ``"seednode":"<ipaddress>"`` to the marketmaker startup arguments, where the netid is any integer higher than 0 but lower than 14420. The seednode is the ip address of the server being a full relay node.
+
 
 Trade commands
 --------------
