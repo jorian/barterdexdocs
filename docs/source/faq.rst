@@ -85,6 +85,8 @@ How do I get the private key of my smartaddress?
 
 BarterDEX uses watch-only addresses, which basically means that BarterDEX is a trade wallet. The passphrase you enter when starting BarterDEX is the access to your coins. 
 
+For now, it requires starting ``marketmaker`` from the command line to retrieve the actual private keys of your smartaddresses. You do this by adding ``"wif":1`` to the marketmaker startup arguments json. In the initial ``getcoin`` that marketmaker does, it will return all wifs for each smartaddress.
+
 How much are the fees?
 ----------------------
 

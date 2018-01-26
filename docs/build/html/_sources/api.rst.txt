@@ -6,9 +6,11 @@ WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK I
 Introduction
 ------------
 
-BarterDEX commands are called using Remote Procedure Calls (RPC). If you installed BarterDEX by following the <INSERT LINK TO THAT GUIDE HERE> CLI manual installation guide, you'll have a lot of these commands ready to use in the ``~/SuperNET/iguana/dexscripts`` folder. These API docs will explain what each command does and what the possible arguments for each method are.
+BarterDEX uses a custom-made peer-to-peer network and has Remote Procedure Calls (RPC) to talk with and get information from the BarterDEX network. If you installed BarterDEX by following the <INSERT LINK TO THAT GUIDE HERE> CLI manual installation guide, you'll have a lot of these commands ready to use in the ``~/SuperNET/iguana/dexscripts`` folder. These API docs will explain what each command does and what the possible arguments for each method are.
 
-You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your device (see below).
+``marketmaker`` is the process that is started on a machine.
+
+You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your machine (see below).
 
 Curl can be used to send commands, see the following example taken from the ``dexscripts`` folder:
 
@@ -34,6 +36,8 @@ The json code in all the methods below is the data that is needed for each metho
    	"rel":"BTC",
    	"margin":0.0001
    }
+
+After ``marketmaker`` started successfully, the first RPC to be issued will always return a ``getcoin``  <REF TO GETCOIN> call for all coins.
 
 
 Starting marketmaker

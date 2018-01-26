@@ -192,8 +192,9 @@
 <p>WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK IN PROGRESS!</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>BarterDEX commands are called using Remote Procedure Calls (RPC). If you installed BarterDEX by following the &lt;INSERT LINK TO THAT GUIDE HERE&gt; CLI manual installation guide, you’ll have a lot of these commands ready to use in the <code class="docutils literal"><span class="pre">~/SuperNET/iguana/dexscripts</span></code> folder. These API docs will explain what each command does and what the possible arguments for each method are.</p>
-<p>You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your device (see below).</p>
+<p>BarterDEX uses a custom-made peer-to-peer network and has Remote Procedure Calls (RPC) to talk with and get information from the BarterDEX network. If you installed BarterDEX by following the &lt;INSERT LINK TO THAT GUIDE HERE&gt; CLI manual installation guide, you’ll have a lot of these commands ready to use in the <code class="docutils literal"><span class="pre">~/SuperNET/iguana/dexscripts</span></code> folder. These API docs will explain what each command does and what the possible arguments for each method are.</p>
+<p><code class="docutils literal"><span class="pre">marketmaker</span></code> is the process that is started on a machine.</p>
+<p>You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your machine (see below).</p>
 <p>Curl can be used to send commands, see the following example taken from the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder:</p>
 <div class="highlight-shell"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nb">source</span> userpass
@@ -213,6 +214,7 @@ Each command to BarterDEX will need this userpass value as value of the <code cl
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>After <code class="docutils literal"><span class="pre">marketmaker</span></code> started successfully, the first RPC to be issued will always return a <code class="docutils literal"><span class="pre">getcoin</span></code>  &lt;REF TO GETCOIN&gt; call for all coins.</p>
 </div>
 <div class="section" id="starting-marketmaker">
 <h2>Starting marketmaker<a class="headerlink" href="#starting-marketmaker" title="Permalink to this headline">¶</a></h2>

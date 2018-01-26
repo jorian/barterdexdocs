@@ -17,7 +17,7 @@ How to get listed on BarterDEX?
 The requirements for a coin to be able to do an atomic swap are:
 
 - have `BIP65 (Check LockTime Verify)`_ implemented;
-- support the following standard Bitcoin API RPCs: ``getinfo`` ``getrawmempool`` ``gettxout`` ``getrawtransaction`` ``getblock`` ``listunspent`` ``listtransactions`` ``validateaddress`` ``importprivkey`` ``importaddress`` ``estimatefee`` ``getblockhash`` ``sendrawtransaction`` ``signrawtransaction``.
+- support the following standard Bitcoin API methods: ``getinfo`` ``getrawmempool`` ``gettxout`` ``getrawtransaction`` ``getblock`` ``listunspent`` ``listtransactions`` ``validateaddress`` ``importprivkey`` ``importaddress`` ``estimatefee`` ``getblockhash`` ``sendrawtransaction`` ``signrawtransaction``.
 
 .. _BIP65 (Check LockTime Verify): https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki
 
@@ -84,6 +84,8 @@ How do I get the private key of my smartaddress?
 ------------------------------------------------
 
 BarterDEX uses watch-only addresses, which basically means that BarterDEX is a trade wallet. The passphrase you enter when starting BarterDEX is the access to your coins. 
+
+For now, it requires starting ``marketmaker`` from the command line to retrieve the actual private keys of your smartaddresses. You do this by adding ``"wif":1`` to the marketmaker startup arguments json. In the initial ``getcoin`` that marketmaker does, it will return all wifs for each smartaddress.
 
 How much are the fees?
 ----------------------
