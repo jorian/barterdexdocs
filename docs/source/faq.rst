@@ -159,6 +159,11 @@ What are the differences between BarterDEX and Altcoin.io?
 Can I privately swap coins with another person?
 -----------------------------------------------
 
+Do I need to leave BarterDEX running all the time?
+--------------------------------------------------
+
+Yes. Atomic swaps needs signed transactions with your private key, so you need to leave BarterDEX running to be able to execute orders.
+
 Yes, that possibility exists, but for now it's only done using the Command Line. See the guide in our Guides section explaining what needs to be done.
 
 .. _Komodo Platform assetchains: https://www.komodoplatform.com/en/blog/komodo-smart-contracts-assetchains-and-geckochains
