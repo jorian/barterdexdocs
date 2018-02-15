@@ -97,6 +97,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-is-an-atomic-swap">What is an atomic swap?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-get-listed-on-barterdex">How to get listed on BarterDEX?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-does-the-barterdex-trading-mechanism-work">How does the BarterDEX trading mechanism work?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#electrum-or-native">Electrum or Native?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-zcredits">What are Zcredits?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-utxos">What are UTXOs?</a></li>
@@ -110,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#currently-supported-coins">Currently supported coins</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-the-differences-between-barterdex-and-blocknet-dx">What are the differences between BarterDEX and BlockNET DX?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-the-differences-between-barterdex-and-altcoin-io">What are the differences between BarterDEX and Altcoin.io?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-are-the-differences-between-barterdex-and-waves-dex">What are the differences between BarterDEX and Waves DEX?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#can-i-privately-swap-coins-with-another-person">Can I privately swap coins with another person?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-is-a-liquidity-provider-lp-node">What is a Liquidity Provider (LP) node?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#do-i-need-to-leave-barterdex-running-all-the-time">Do I need to leave BarterDEX running all the time?</a></li>
@@ -209,17 +211,21 @@ getrawtransaction           sendrawtransaction
 gettxout                    signrawtransaction
 </pre></div>
 </div>
+<p>Note that apart from supporting the above requirements, no additional custom code is needed to be able to trade on BarterDEX. (This in contrast to the misinformation being spread on several forums, where is stated that BarterDEX requires customizations to coins)</p>
+</div>
+<div class="section" id="how-does-the-barterdex-trading-mechanism-work">
+<h2>How does the BarterDEX trading mechanism work?<a class="headerlink" href="#how-does-the-barterdex-trading-mechanism-work" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="electrum-or-native">
 <h2>Electrum or Native?<a class="headerlink" href="#electrum-or-native" title="Permalink to this headline">¶</a></h2>
-<p>Electrum let’s you use the blockchain of the coin you want to trade, without having to download, install and sync that wallet. Just select Electrum and you are good to go.</p>
-<p>Electrum is a Simple Payment Verification service, somewhere on a server, that can be used to verify transactions with. In other words, this means you can use this instead of having to download the wallet of your coin, let it sync etc.</p>
+<p>Electrum lets you use the blockchain of the coin you want to trade, without having to download, install and sync that wallet. Just select Electrum and you are good to go.</p>
+<p>Electrum is a Simple Payment Verification (SPV) service, somewhere on a server, that can be used to verify transactions on the network of the selected coin, without having to expose your private key. This means you can use this SPV service instead of going through the hassle of downloading the wallet of your coin, synchronizing the blockchain etc.</p>
 <p>Native is when you download, install and sync the wallet of the coin you want to trade. It is faster and more stable than using Electrum, for now. It is highly recommended for Liquidity Providers to use Native and not to use Electrum.</p>
 </div>
 <div class="section" id="what-are-zcredits">
 <h2>What are Zcredits?<a class="headerlink" href="#what-are-zcredits" title="Permalink to this headline">¶</a></h2>
-<p>Z-credits are credits for being able to do zero confirmation swaps. Zero confirmation swaps let you swap within 30 seconds, instead of waiting for the standard coin confirmation times.</p>
-<p>You get Z-credits by depositing KMD and locking it for an X amount of weeks. So if you deposit 10 KMD you get 10 zcredits, and trades worth up to 10 KMD are now eligible for Zero Confirmation swaps. This is valid for all coins, even if KMD is not involved in a trade. BarterDEX will determine the value of the trade equivalent in KMD to check if a Zero Confirmation swap is possible. For BarterDEX to be able to determine this, a price must be set for the coin/KMD pair.</p>
+<p>Zcredits are credits for being able to do zero confirmation swaps. Zero confirmation swaps let you swap 2 coins in approximately 30 seconds, instead of waiting for the coin’s block confirmation times.</p>
+<p>You get Zcredits by depositing KMD and locking it for an X amount of weeks. So if you deposit 10 KMD you get 10 Zcredits, and trades worth up to 10 KMD are now eligible for Zero Confirmation swaps. This is valid for all coins, even if KMD is not involved in a trade. BarterDEX will determine the value of the trade equivalent in KMD to check if a Zero Confirmation swap is possible. For BarterDEX to be able to determine this, a price must be set for the coin/KMD pair.</p>
 </div>
 <div class="section" id="what-are-utxos">
 <h2>What are UTXOs?<a class="headerlink" href="#what-are-utxos" title="Permalink to this headline">¶</a></h2>
@@ -240,6 +246,7 @@ gettxout                    signrawtransaction
 <span class="n">timestamp</span> <span class="o">*=</span> <span class="n">LP_WEEKMULT</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>Doing a claim on a still locked deposit will return the time you need to wait before your deposit can successfully be claimed.</p>
 </div>
 <div class="section" id="who-are-alice-and-bob">
 <h2>Who are alice and bob?<a class="headerlink" href="#who-are-alice-and-bob" title="Permalink to this headline">¶</a></h2>
@@ -247,7 +254,7 @@ gettxout                    signrawtransaction
 </div>
 <div class="section" id="is-it-free-to-cancel-an-order">
 <h2>Is it free to cancel an order?<a class="headerlink" href="#is-it-free-to-cancel-an-order" title="Permalink to this headline">¶</a></h2>
-<p>Yes. Placing orders and sending a request doesn’t cost you anything. Only when your request has found a willing trade partner and a connection has been established, you will start paying the dexfee.</p>
+<p>Yes. Placing orders and sending a request doesn’t cost you anything. Only when your request has found a willing trade partner and a connection has been established, the dexfee and transaction fees will be paid.</p>
 </div>
 <div class="section" id="how-do-i-cancel-an-order">
 <h2>How do I cancel an order?<a class="headerlink" href="#how-do-i-cancel-an-order" title="Permalink to this headline">¶</a></h2>
@@ -269,18 +276,16 @@ gettxout                    signrawtransaction
 <h2>Currently supported coins<a class="headerlink" href="#currently-supported-coins" title="Permalink to this headline">¶</a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="3%" />
-<col width="8%" />
-<col width="5%" />
-<col width="10%" />
-<col width="74%" />
+<col width="12%" />
+<col width="29%" />
+<col width="20%" />
+<col width="39%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Coin</th>
 <th class="head">Name</th>
 <th class="head">Asset</th>
 <th class="head">Name/description</th>
-<th class="head">Info</th>
 </tr>
 </thead>
 <tbody valign="top">
@@ -288,101 +293,84 @@ gettxout                    signrawtransaction
 <td>Bitcoin</td>
 <td>REVS</td>
 <td>Revenue Shares</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>LTC</td>
 <td>Litecoin</td>
 <td>SUPERNET</td>
 <td>Supernet / Unity</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>KMD</td>
 <td>Komodo</td>
 <td>DEX</td>
 <td>InstantDEX</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>BTG</td>
 <td>Bitcoin Gold</td>
 <td>PANGEA</td>
 <td>Pangea Poker</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>BCH</td>
 <td>Bitcoin Cash</td>
 <td>JUMBLR</td>
-<td>JUMBLR</td>
-<td><a class="reference external" href="https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/">https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/</a></td>
+<td><a class="reference external" href="https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/">JUMBLR</a></td>
 </tr>
 <tr class="row-odd"><td>ZEC</td>
 <td>Zcash</td>
 <td>BET</td>
 <td>BET Platform</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>VTC</td>
 <td>VertCoin</td>
 <td>CRYPTO</td>
-<td>CRYPTO777</td>
-<td><a class="reference external" href="https://nxtforum.org/consensus-research/crypto777/">https://nxtforum.org/consensus-research/crypto777/</a></td>
+<td><a class="reference external" href="https://nxtforum.org/consensus-research/crypto777/">CRYPTO777</a></td>
 </tr>
 <tr class="row-odd"><td>DOGE</td>
 <td>DogeCoin</td>
 <td>HODL</td>
 <td>HODL</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>HUSH</td>
 <td>Hush</td>
 <td>MSHARK</td>
 <td>MSHARK</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>GRS</td>
 <td>GroestlCoin</td>
 <td>BOTS</td>
 <td>Tradebots</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>DGB</td>
 <td>DigiByte</td>
 <td>COQUI</td>
 <td>Coqui</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>XMCC</td>
 <td>Monoeci</td>
 <td>WLC</td>
 <td>WirelessCoin</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>BTCH</td>
 <td>Bitcoin Hush</td>
 <td>KV</td>
 <td>Key-Value</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>CRC</td>
 <td>CrowdCoin</td>
 <td>CEAL</td>
 <td>CEAL</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>VOT</td>
 <td>VoteCoin</td>
 <td>MESH</td>
 <td>MESH</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-odd"><td>INN</td>
 <td>Innova</td>
 <td>ETOMIC</td>
-<td>Ether swaps</td>
-<td>&#160;</td>
+<td>ERC20</td>
 </tr>
 <tr class="row-even"><td>MOON</td>
 <td>MoonCoin</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -390,11 +378,9 @@ gettxout                    signrawtransaction
 <td>Crown</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>EFL</td>
 <td>eGulden</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -402,11 +388,9 @@ gettxout                    signrawtransaction
 <td>GoByte</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>BCO</td>
 <td>BridgeCoin</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -414,11 +398,9 @@ gettxout                    signrawtransaction
 <td>BlackCoin</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>ABY</td>
 <td>Applebyte</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -426,11 +408,9 @@ gettxout                    signrawtransaction
 <td>Straks</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>XZC</td>
 <td>Zcoin</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -438,11 +418,9 @@ gettxout                    signrawtransaction
 <td>QTUM</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>PURA</td>
 <td>PURA</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -450,11 +428,9 @@ gettxout                    signrawtransaction
 <td>Desire</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>MNZ</td>
 <td>Monaize</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -462,11 +438,9 @@ gettxout                    signrawtransaction
 <td>Bitcoin Z</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>MAGA</td>
 <td>MagaCoin</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -474,11 +448,9 @@ gettxout                    signrawtransaction
 <td>Bitsend</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>IOP</td>
 <td>IoP</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -486,11 +458,9 @@ gettxout                    signrawtransaction
 <td>BlockNET DX</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>CHIPS</td>
 <td>CHIPS</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -498,11 +468,9 @@ gettxout                    signrawtransaction
 <td>OctoCoin</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>ARG</td>
 <td>Argentum</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -510,11 +478,9 @@ gettxout                    signrawtransaction
 <td>Global Token</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>ZER</td>
 <td>Zero</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -522,11 +488,9 @@ gettxout                    signrawtransaction
 <td>HOdlcoin</td>
 <td>&#160;</td>
 <td>&#160;</td>
-<td>&#160;</td>
 </tr>
 <tr class="row-even"><td>UIS</td>
 <td>Unitus</td>
-<td>&#160;</td>
 <td>&#160;</td>
 <td>&#160;</td>
 </tr>
@@ -536,9 +500,40 @@ gettxout                    signrawtransaction
 </div>
 <div class="section" id="what-are-the-differences-between-barterdex-and-blocknet-dx">
 <h2>What are the differences between BarterDEX and BlockNET DX?<a class="headerlink" href="#what-are-the-differences-between-barterdex-and-blocknet-dx" title="Permalink to this headline">¶</a></h2>
+<p>BlockNET DX, or BlockDX, is a coin which focus solely lies on creating a Decentralized Exchange. The differences between BarterDEX and BlockDX are subtle, but important.</p>
+<p>First of all, the fees:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="28%" />
+<col width="36%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">fees:</th>
+<th class="head">BlockDX</th>
+<th class="head">BarterDEX</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Maker-fee</td>
+<td>0.05%</td>
+<td>0.15%</td>
+</tr>
+<tr class="row-odd"><td>Taker-fee</td>
+<td>0.20%</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>These fees do not take standard transaction fees into account, which for BarterDEX is based on the amount of transactions necessary to do an atomic swap (3 for maker, 4 for taker). BlockDX is (at the time of this writing) not yet live, so nothing can be said of how many standard transaction fees they require.</p>
+<p>BlockDX uses so-called Service Nodes to be able to do atomic swaps. They are essential in the process of doing an atomic swap; without the Service Nodes, you can’t trade. This in stark contrast with BarterDEX, where you don’t need Service Nodes to be able to trade. 2 nodes, both running BarterDEX, are able to do an atomic swap between each other, without needing anything else.</p>
+<p>At the time of this writing, BlockDX has yet to release (a beta of) their DEX and its source code. Until then, no proper comparison can be made between BlockDX and BarterDEX. It is clear though, that BlockDX is going to be the closest ‘competitor’ to BarterDEX.</p>
 </div>
 <div class="section" id="what-are-the-differences-between-barterdex-and-altcoin-io">
 <h2>What are the differences between BarterDEX and Altcoin.io?<a class="headerlink" href="#what-are-the-differences-between-barterdex-and-altcoin-io" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="what-are-the-differences-between-barterdex-and-waves-dex">
+<h2>What are the differences between BarterDEX and Waves DEX?<a class="headerlink" href="#what-are-the-differences-between-barterdex-and-waves-dex" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="can-i-privately-swap-coins-with-another-person">
 <h2>Can I privately swap coins with another person?<a class="headerlink" href="#can-i-privately-swap-coins-with-another-person" title="Permalink to this headline">¶</a></h2>

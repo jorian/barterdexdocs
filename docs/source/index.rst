@@ -6,15 +6,6 @@ Welcome to BarterDEX's documentation!
 
 BarterDEX is a decentralized cryptocurrency exchange using atomic swaps to trade coin A directly with coin B, without needing to trust a third party.
 
-Todo
-
-- Tier Nolan protocol
-- Decentralized orderbooks
-- Decentralized ordermatching
-
-* :ref:`user-docs`
-* :ref:`developer`
-
 .. _user-docs:
 
 .. toctree::

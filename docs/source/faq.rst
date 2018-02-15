@@ -31,24 +31,30 @@ The requirements for a coin to be able to do an atomic swap are:
     getrawtransaction		sendrawtransaction
     gettxout 			signrawtransaction
 
+Note that apart from supporting the above requirements, no additional custom code is needed to be able to trade on BarterDEX. (This in contrast to the misinformation being spread on several forums, where is stated that BarterDEX requires customizations to coins)
+
 
 .. _BIP65 (Check LockTime Verify): https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki
+
+How does the BarterDEX trading mechanism work?
+----------------------------------------------
+
 
 Electrum or Native?
 -------------------
 
-Electrum let's you use the blockchain of the coin you want to trade, without having to download, install and sync that wallet. Just select Electrum and you are good to go.
+Electrum lets you use the blockchain of the coin you want to trade, without having to download, install and sync that wallet. Just select Electrum and you are good to go.
 
-Electrum is a Simple Payment Verification service, somewhere on a server, that can be used to verify transactions with. In other words, this means you can use this instead of having to download the wallet of your coin, let it sync etc. 
+Electrum is a Simple Payment Verification (SPV) service, somewhere on a server, that can be used to verify transactions on the network of the selected coin, without having to expose your private key. This means you can use this SPV service instead of going through the hassle of downloading the wallet of your coin, synchronizing the blockchain etc. 
 
 Native is when you download, install and sync the wallet of the coin you want to trade. It is faster and more stable than using Electrum, for now. It is highly recommended for Liquidity Providers to use Native and not to use Electrum.
 
 What are Zcredits?
 ------------------
 
-Z-credits are credits for being able to do zero confirmation swaps. Zero confirmation swaps let you swap within 30 seconds, instead of waiting for the standard coin confirmation times. 
+Zcredits are credits for being able to do zero confirmation swaps. Zero confirmation swaps let you swap 2 coins in approximately 30 seconds, instead of waiting for the coin's block confirmation times. 
 
-You get Z-credits by depositing KMD and locking it for an X amount of weeks. So if you deposit 10 KMD you get 10 zcredits, and trades worth up to 10 KMD are now eligible for Zero Confirmation swaps. This is valid for all coins, even if KMD is not involved in a trade. BarterDEX will determine the value of the trade equivalent in KMD to check if a Zero Confirmation swap is possible. For BarterDEX to be able to determine this, a price must be set for the coin/KMD pair.
+You get Zcredits by depositing KMD and locking it for an X amount of weeks. So if you deposit 10 KMD you get 10 Zcredits, and trades worth up to 10 KMD are now eligible for Zero Confirmation swaps. This is valid for all coins, even if KMD is not involved in a trade. BarterDEX will determine the value of the trade equivalent in KMD to check if a Zero Confirmation swap is possible. For BarterDEX to be able to determine this, a price must be set for the coin/KMD pair.
 
 What are UTXOs?
 ---------------
@@ -76,7 +82,7 @@ The calculation in the code:
    timestamp += weeks + 2;
    timestamp *= LP_WEEKMULT;
 
-
+Doing a claim on a still locked deposit will return the time you need to wait before your deposit can successfully be claimed.
 
 .. _Unspent Transaction Output: http://learnmeabitcoin.com/glossary/utxo 
 
@@ -88,7 +94,7 @@ In BarterDEX terms, alice is the one who initiates a trade. She buys an order fr
 Is it free to cancel an order?
 ------------------------------
 
-Yes. Placing orders and sending a request doesn't cost you anything. Only when your request has found a willing trade partner and a connection has been established, you will start paying the dexfee.
+Yes. Placing orders and sending a request doesn't cost you anything. Only when your request has found a willing trade partner and a connection has been established, the dexfee and transaction fees will be paid.
 
 How do I cancel an order?
 -------------------------
@@ -117,16 +123,16 @@ The dexfees are collected and once a significant amount of fees are collected, t
 Currently supported coins
 -------------------------
 
-===== ============ ======== ================ ====
-Coin  Name         Asset    Name/description Info
-===== ============ ======== ================ ====
+===== ============ ======== ================
+Coin  Name         Asset    Name/description
+===== ============ ======== ================
 BTC   Bitcoin      REVS     Revenue Shares
 LTC   Litecoin     SUPERNET Supernet / Unity
 KMD   Komodo       DEX      InstantDEX
 BTG   Bitcoin Gold PANGEA   Pangea Poker
-BCH   Bitcoin Cash JUMBLR   JUMBLR           https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/
+BCH   Bitcoin Cash JUMBLR   `JUMBLR`_           
 ZEC   Zcash        BET      BET Platform
-VTC   VertCoin     CRYPTO   CRYPTO777        https://nxtforum.org/consensus-research/crypto777/
+VTC   VertCoin     CRYPTO   `CRYPTO777`_        
 DOGE  DogeCoin     HODL     HODL
 HUSH  Hush         MSHARK   MSHARK
 GRS   GroestlCoin  BOTS     Tradebots
@@ -135,7 +141,7 @@ XMCC  Monoeci      WLC      WirelessCoin
 BTCH  Bitcoin Hush KV       Key-Value
 CRC   CrowdCoin    CEAL     CEAL
 VOT   VoteCoin     MESH     MESH
-INN   Innova       ETOMIC   Ether swaps
+INN   Innova       ETOMIC   ERC20 
 MOON  MoonCoin
 CRW   Crown
 EFL   eGulden
@@ -161,15 +167,35 @@ GLT   Global Token
 ZER   Zero
 HODLC HOdlcoin
 UIS   Unitus
-===== ============ ======== ================ ====
+===== ============ ======== ================
 
 All the `Komodo Platform assetchains`_
 
 What are the differences between BarterDEX and BlockNET DX?
 -----------------------------------------------------------
 
+BlockNET DX, or BlockDX, is a coin which focus solely lies on creating a Decentralized Exchange. The differences between BarterDEX and BlockDX are subtle, but important.
+
+First of all, the fees:
+
+=========   ======= =========
+fees:       BlockDX BarterDEX
+=========   ======= =========
+Maker-fee   0.05%   0.15%
+Taker-fee   0.20%   none
+=========   ======= =========
+
+These fees do not take standard transaction fees into account, which for BarterDEX is based on the amount of transactions necessary to do an atomic swap (3 for maker, 4 for taker). BlockDX is (at the time of this writing) not yet live, so nothing can be said of how many standard transaction fees they require. 
+
+BlockDX uses so-called Service Nodes to be able to do atomic swaps. They are essential in the process of doing an atomic swap; without the Service Nodes, you can't trade. This in stark contrast with BarterDEX, where you don't need Service Nodes to be able to trade. 2 nodes, both running BarterDEX, are able to do an atomic swap between each other, without needing anything else.
+
+At the time of this writing, BlockDX has yet to release (a beta of) their DEX and its source code. Until then, no proper comparison can be made between BlockDX and BarterDEX. It is clear though, that BlockDX is going to be the closest 'competitor' to BarterDEX. 
+
 What are the differences between BarterDEX and Altcoin.io?
 ----------------------------------------------------------
+
+What are the differences between BarterDEX and Waves DEX?
+---------------------------------------------------------
 
 Can I privately swap coins with another person?
 -----------------------------------------------
@@ -184,5 +210,7 @@ Yes. Atomic swaps needs signed transactions with your private key, so you need t
 
 Yes, that possibility exists, but for now it's only done using the Command Line. See the guide in our Guides section explaining what needs to be done.
 
+.. _JUMBLR: https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/
+.. _CRYPTO777: https://nxtforum.org/consensus-research/crypto777/
 .. _Komodo Platform assetchains: https://www.komodoplatform.com/en/blog/komodo-smart-contracts-assetchains-and-geckochains
 
