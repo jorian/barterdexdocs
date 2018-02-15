@@ -111,6 +111,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#what-are-the-differences-between-barterdex-and-blocknet-dx">What are the differences between BarterDEX and BlockNET DX?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-the-differences-between-barterdex-and-altcoin-io">What are the differences between BarterDEX and Altcoin.io?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#can-i-privately-swap-coins-with-another-person">Can I privately swap coins with another person?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-a-liquidity-provider-lp-node">What is a Liquidity Provider (LP) node?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#do-i-need-to-leave-barterdex-running-all-the-time">Do I need to leave BarterDEX running all the time?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with BarterDEX</a></li>
@@ -192,12 +194,21 @@
 <p>Certain safeguards are needed to make sure the stealing of funds is not possible by either party.</p>
 </div>
 <div class="section" id="how-to-get-listed-on-barterdex">
-<h2>How to get listed on BarterDEX?<a class="headerlink" href="#how-to-get-listed-on-barterdex" title="Permalink to this headline">¶</a></h2>
+<span id="how-to-get-listed"></span><h2>How to get listed on BarterDEX?<a class="headerlink" href="#how-to-get-listed-on-barterdex" title="Permalink to this headline">¶</a></h2>
 <p>The requirements for a coin to be able to do an atomic swap are:</p>
 <ul class="simple">
 <li>have <a class="reference external" href="https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki">BIP65 (Check LockTime Verify)</a> implemented;</li>
-<li>support the following standard Bitcoin API methods: <code class="docutils literal"><span class="pre">getinfo</span></code> <code class="docutils literal"><span class="pre">getrawmempool</span></code> <code class="docutils literal"><span class="pre">gettxout</span></code> <code class="docutils literal"><span class="pre">getrawtransaction</span></code> <code class="docutils literal"><span class="pre">getblock</span></code> <code class="docutils literal"><span class="pre">listunspent</span></code> <code class="docutils literal"><span class="pre">listtransactions</span></code> <code class="docutils literal"><span class="pre">validateaddress</span></code> <code class="docutils literal"><span class="pre">importprivkey</span></code> <code class="docutils literal"><span class="pre">importaddress</span></code> <code class="docutils literal"><span class="pre">estimatefee</span></code> <code class="docutils literal"><span class="pre">getblockhash</span></code> <code class="docutils literal"><span class="pre">sendrawtransaction</span></code> <code class="docutils literal"><span class="pre">signrawtransaction</span></code>.</li>
+<li>support the following standard Bitcoin API methods:</li>
 </ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>estimatefee                 importaddress
+getblock                    importprivkey
+getblockhash                listunspent
+getinfo                     listtransactions
+getrawmempool               validateaddress
+getrawtransaction           sendrawtransaction
+gettxout                    signrawtransaction
+</pre></div>
+</div>
 </div>
 <div class="section" id="electrum-or-native">
 <h2>Electrum or Native?<a class="headerlink" href="#electrum-or-native" title="Permalink to this headline">¶</a></h2>
@@ -207,9 +218,8 @@
 </div>
 <div class="section" id="what-are-zcredits">
 <h2>What are Zcredits?<a class="headerlink" href="#what-are-zcredits" title="Permalink to this headline">¶</a></h2>
-<p>zcredits are credits for being able to do zero confirmation swaps
-you get zcredits by depositing KMD and locking it for an x amount of weeks
-so if you deposit 10 KMD you get 10 zcredits, if i’m not mistaken</p>
+<p>Z-credits are credits for being able to do zero confirmation swaps. Zero confirmation swaps let you swap within 30 seconds, instead of waiting for the standard coin confirmation times.</p>
+<p>You get Z-credits by depositing KMD and locking it for an X amount of weeks. So if you deposit 10 KMD you get 10 zcredits, and trades worth up to 10 KMD are now eligible for Zero Confirmation swaps. This is valid for all coins, even if KMD is not involved in a trade. BarterDEX will determine the value of the trade equivalent in KMD to check if a Zero Confirmation swap is possible. For BarterDEX to be able to determine this, a price must be set for the coin/KMD pair.</p>
 </div>
 <div class="section" id="what-are-utxos">
 <h2>What are UTXOs?<a class="headerlink" href="#what-are-utxos" title="Permalink to this headline">¶</a></h2>
@@ -223,10 +233,11 @@ so if you deposit 10 KMD you get 10 zcredits, if i’m not mistaken</p>
 <div class="section" id="why-can-t-i-claim-my-expired-0-conf-deposit">
 <h2>Why can’t I claim my expired 0-conf deposit?<a class="headerlink" href="#why-can-t-i-claim-my-expired-0-conf-deposit" title="Permalink to this headline">¶</a></h2>
 <p>This is due to avoid bad actors stealing the deposit, and depends on the time you made a deposit. Funds are available 3 - 10 days after the expiration of the number of weeks you defined when making the deposit.</p>
+<p>The calculation in the code:</p>
 <div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">timestamp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span> <span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-    <span class="n">timestamp</span> <span class="o">/=</span> <span class="n">LP_WEEKMULT</span><span class="p">;</span>
-    <span class="n">timestamp</span> <span class="o">+=</span> <span class="n">weeks</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="n">timestamp</span> <span class="o">*=</span> <span class="n">LP_WEEKMULT</span><span class="p">;</span>
+<span class="n">timestamp</span> <span class="o">/=</span> <span class="n">LP_WEEKMULT</span><span class="p">;</span>
+<span class="n">timestamp</span> <span class="o">+=</span> <span class="n">weeks</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">timestamp</span> <span class="o">*=</span> <span class="n">LP_WEEKMULT</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
@@ -531,6 +542,13 @@ so if you deposit 10 KMD you get 10 zcredits, if i’m not mistaken</p>
 </div>
 <div class="section" id="can-i-privately-swap-coins-with-another-person">
 <h2>Can I privately swap coins with another person?<a class="headerlink" href="#can-i-privately-swap-coins-with-another-person" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="what-is-a-liquidity-provider-lp-node">
+<h2>What is a Liquidity Provider (LP) node?<a class="headerlink" href="#what-is-a-liquidity-provider-lp-node" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="do-i-need-to-leave-barterdex-running-all-the-time">
+<h2>Do I need to leave BarterDEX running all the time?<a class="headerlink" href="#do-i-need-to-leave-barterdex-running-all-the-time" title="Permalink to this headline">¶</a></h2>
+<p>Yes. Atomic swaps needs signed transactions with your private key, so you need to leave BarterDEX running to be able to execute orders.</p>
 <p>Yes, that possibility exists, but for now it’s only done using the Command Line. See the guide in our Guides section explaining what needs to be done.</p>
 </div>
 </div>

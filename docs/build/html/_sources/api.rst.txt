@@ -30,7 +30,7 @@ The json code in all the methods below is the data that is needed for each metho
 .. code-block:: json
 
    {
-   	"userpass":"$userpass",
+   	"userpass":"<userpass>",
    	"method":"autoprice",
    	"base":"KMD",
    	"rel":"BTC",
@@ -60,14 +60,22 @@ A full relay node is started by running marketmaker with the following arguments
 	"coins":["<coins>"] 
    }
 
-``gui`` is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI.
+- ``gui`` is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI. 
+- ``profitmargin`` is the default profitmargin that this full relay node (or Liquidity Provider node) will use when placing orders in orderbooks using the ``autoprice`` method. 
+- ``userhome`` is the location of the userhome.
+- ``passphrase`` is the passphrase that is needed by ``marketmaker`` to determine the userpass and all smartaddresses that BarterDEX is going to use. 
+- ``coins`` needs a JSON of all BarterDEX-enabled coins. Not all cryptocurrencies are able to do atomic swaps, because they lack CheckLockTimeVerify (BIP65) or one of the necessary Bitcoin API methods. (See :ref:`how-to-get-listed` for details)
 
-``profitmargin`` is the default profitmargin that this full relay node (or Liquidity Provider node) will use when placing orders in orderbooks using the ``autoprice`` method.
+.. _
 
 New or private network
 ^^^^^^^^^^^^^^^^^^^^^^
 
 In order to start a network other than the default network, you need to add 2 arguments to the marketmaker startup arguments. When initiating a new network, a full relay node must be used, and it has to define ``"netid":<int netid>`` and ``"seednode":"<ipaddress>"`` to the marketmaker startup arguments, where the netid is any integer higher than 0 but lower than 14420. The seednode is the ip address of the server being a full relay node.
+
+Do not forget RPCport!
+
+Non-relay nodes (``client``) need to use the same 2 arguments in its start up arguments, to be able to join that network.
 
 
 Trade commands

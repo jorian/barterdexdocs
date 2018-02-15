@@ -206,7 +206,7 @@ Each command to BarterDEX will need this userpass value as value of the <code cl
 <p><code class="docutils literal"><span class="pre">127.0.0.1:7783</span></code> is the ip address and port where BarterDEX is listening for commands.</p>
 <p>The json code in all the methods below is the data that is needed for each method described (mind the escape characters when using shell). For example:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
-     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span><span class="s2">&quot;$userpass&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;userpass&gt;&quot;</span><span class="p">,</span>
      <span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
      <span class="nt">&quot;base&quot;</span><span class="p">:</span><span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
      <span class="nt">&quot;rel&quot;</span><span class="p">:</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
@@ -231,12 +231,19 @@ Each command to BarterDEX will need this userpass value as value of the <code cl
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">gui</span></code> is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI.</p>
-<p><code class="docutils literal"><span class="pre">profitmargin</span></code> is the default profitmargin that this full relay node (or Liquidity Provider node) will use when placing orders in orderbooks using the <code class="docutils literal"><span class="pre">autoprice</span></code> method.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">gui</span></code> is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI.</li>
+<li><code class="docutils literal"><span class="pre">profitmargin</span></code> is the default profitmargin that this full relay node (or Liquidity Provider node) will use when placing orders in orderbooks using the <code class="docutils literal"><span class="pre">autoprice</span></code> method.</li>
+<li><code class="docutils literal"><span class="pre">userhome</span></code> is the location of the userhome.</li>
+<li><code class="docutils literal"><span class="pre">passphrase</span></code> is the passphrase that is needed by <code class="docutils literal"><span class="pre">marketmaker</span></code> to determine the userpass and all smartaddresses that BarterDEX is going to use.</li>
+<li><code class="docutils literal"><span class="pre">coins</span></code> needs a JSON of all BarterDEX-enabled coins. Not all cryptocurrencies are able to do atomic swaps, because they lack CheckLockTimeVerify (BIP65) or one of the necessary Bitcoin API methods. (See <a class="reference internal" href="faq.html#how-to-get-listed"><span class="std std-ref">How to get listed on BarterDEX?</span></a> for details)</li>
+</ul>
 </div>
 <div class="section" id="new-or-private-network">
 <h3>New or private network<a class="headerlink" href="#new-or-private-network" title="Permalink to this headline">¶</a></h3>
 <p>In order to start a network other than the default network, you need to add 2 arguments to the marketmaker startup arguments. When initiating a new network, a full relay node must be used, and it has to define <code class="docutils literal"><span class="pre">&quot;netid&quot;:&lt;int</span> <span class="pre">netid&gt;</span></code> and <code class="docutils literal"><span class="pre">&quot;seednode&quot;:&quot;&lt;ipaddress&gt;&quot;</span></code> to the marketmaker startup arguments, where the netid is any integer higher than 0 but lower than 14420. The seednode is the ip address of the server being a full relay node.</p>
+<p>Do not forget RPCport!</p>
+<p>Non-relay nodes (<code class="docutils literal"><span class="pre">client</span></code>) need to use the same 2 arguments in its start up arguments, to be able to join that network.</p>
 </div>
 </div>
 <div class="section" id="trade-commands">

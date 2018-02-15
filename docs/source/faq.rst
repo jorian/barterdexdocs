@@ -11,13 +11,26 @@ Atomic means that a swap either totally succeeds or not at all.
 
 Certain safeguards are needed to make sure the stealing of funds is not possible by either party.
 
+.. _how-to-get-listed:
+
 How to get listed on BarterDEX?
 -------------------------------
 
 The requirements for a coin to be able to do an atomic swap are:
 
 - have `BIP65 (Check LockTime Verify)`_ implemented;
-- support the following standard Bitcoin API methods: ``getinfo`` ``getrawmempool`` ``gettxout`` ``getrawtransaction`` ``getblock`` ``listunspent`` ``listtransactions`` ``validateaddress`` ``importprivkey`` ``importaddress`` ``estimatefee`` ``getblockhash`` ``sendrawtransaction`` ``signrawtransaction``.
+- support the following standard Bitcoin API methods:
+
+.. code-block:: bash
+
+    estimatefee			importaddress
+    getblock 			importprivkey
+    getblockhash		listunspent
+    getinfo			listtransactions	
+    getrawmempool 		validateaddress
+    getrawtransaction		sendrawtransaction
+    gettxout 			signrawtransaction
+
 
 .. _BIP65 (Check LockTime Verify): https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki
 
@@ -33,9 +46,9 @@ Native is when you download, install and sync the wallet of the coin you want to
 What are Zcredits?
 ------------------
 
-zcredits are credits for being able to do zero confirmation swaps
-you get zcredits by depositing KMD and locking it for an x amount of weeks
-so if you deposit 10 KMD you get 10 zcredits, if i'm not mistaken
+Z-credits are credits for being able to do zero confirmation swaps. Zero confirmation swaps let you swap within 30 seconds, instead of waiting for the standard coin confirmation times. 
+
+You get Z-credits by depositing KMD and locking it for an X amount of weeks. So if you deposit 10 KMD you get 10 zcredits, and trades worth up to 10 KMD are now eligible for Zero Confirmation swaps. This is valid for all coins, even if KMD is not involved in a trade. BarterDEX will determine the value of the trade equivalent in KMD to check if a Zero Confirmation swap is possible. For BarterDEX to be able to determine this, a price must be set for the coin/KMD pair.
 
 What are UTXOs?
 ---------------
@@ -54,12 +67,14 @@ Why can't I claim my expired 0-conf deposit?
 
 This is due to avoid bad actors stealing the deposit, and depends on the time you made a deposit. Funds are available 3 - 10 days after the expiration of the number of weeks you defined when making the deposit.
 
+The calculation in the code:
+
 .. code-block:: c
    
    timestamp = (uint32_t) time(NULL);
-       timestamp /= LP_WEEKMULT;
-       timestamp += weeks + 2;
-       timestamp *= LP_WEEKMULT;
+   timestamp /= LP_WEEKMULT;
+   timestamp += weeks + 2;
+   timestamp *= LP_WEEKMULT;
 
 
 
@@ -158,6 +173,9 @@ What are the differences between BarterDEX and Altcoin.io?
 
 Can I privately swap coins with another person?
 -----------------------------------------------
+
+What is a Liquidity Provider (LP) node?
+---------------------------------------
 
 Do I need to leave BarterDEX running all the time?
 --------------------------------------------------
