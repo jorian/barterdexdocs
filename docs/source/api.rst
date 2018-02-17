@@ -37,6 +37,7 @@ The json code in all the methods below is the data that is needed for each metho
    	"margin":0.0001
    }
 
+Replace everything that is shown as <this> with your own data.
 
 Starting marketmaker
 --------------------
@@ -95,6 +96,8 @@ The ``netid`` needs to be defined when using a ``netid`` other than 0.
 
 This method will return a response containing the ``userpass`` value for the user passphrase as defined in the ``passphrase`` method.
 
+.. _new-or-private-network:
+
 New or private network
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -102,7 +105,7 @@ In order to start a network other than the default network, you need to add at l
 
 Non-relay nodes (``client``) need to use the same 2 arguments in its startup arguments, to be able to join that network.
 
-At default, the RPC port for a marketmaker instance is 7783. To override this setting, add ``"rpcport":<int port>`` to the startup arguments. This port can be any port in the range 1025 - 65535. Defining the RPC port is for local networking; other nodes in the network do not have to comply with RPC port settings.
+At default, the RPC port for a marketmaker instance is 7783. To override this setting, add ``"rpcport":<int port>`` to the startup arguments. This port can be any port in the range 1025 - 65535. Defining the RPC port is for local networking; other nodes in the network do not have to comply by having the same RPC port settings.
 
 Multiple marketmaker instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -114,6 +117,16 @@ When initiating a new network, apart from defining the ``netid``, the ``seednode
 This basically means that an almost infinite number of BarterDEX networks can be created, using the ``netid`` and ``seednode`` startup arguments for ``marketmaker``.
 
 .. _default seednodes: https://github.com/jl777/SuperNET/blob/dev/iguana/exchanges/LP_nativeDEX.c#L141 
+
+General commands
+----------------
+
+- fetching orderbook
+- get coin info, smart addy etc
+- balance(s)
+- listunspent
+- swapstatus
+
 
 Trade commands
 --------------

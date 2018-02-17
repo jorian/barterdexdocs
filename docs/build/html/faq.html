@@ -527,6 +527,7 @@ gettxout                    signrawtransaction
 </table>
 <p>These fees do not take standard transaction fees into account, which for BarterDEX is based on the amount of transactions necessary to do an atomic swap (3 for maker, 4 for taker). BlockDX is (at the time of this writing) not yet live, so nothing can be said of how many standard transaction fees they require.</p>
 <p>BlockDX uses so-called Service Nodes to be able to do atomic swaps. They are essential in the process of doing an atomic swap; without the Service Nodes, you can’t trade. This in stark contrast with BarterDEX, where you don’t need Service Nodes to be able to trade. 2 nodes, both running BarterDEX, are able to do an atomic swap between each other, without needing anything else.</p>
+<p>To use the BlockDX, you need to download and install the BlockDX wallet. BarterDEX is not tied to any cryptocurrency</p>
 <p>At the time of this writing, BlockDX has yet to release (a beta of) their DEX and its source code. Until then, no proper comparison can be made between BlockDX and BarterDEX. It is clear though, that BlockDX is going to be the closest ‘competitor’ to BarterDEX.</p>
 </div>
 <div class="section" id="what-are-the-differences-between-barterdex-and-altcoin-io">
@@ -543,7 +544,7 @@ gettxout                    signrawtransaction
 </div>
 <div class="section" id="do-i-need-to-leave-barterdex-running-all-the-time">
 <h2>Do I need to leave BarterDEX running all the time?<a class="headerlink" href="#do-i-need-to-leave-barterdex-running-all-the-time" title="Permalink to this headline">¶</a></h2>
-<p>Yes. Atomic swaps needs signed transactions with your private key, so you need to leave BarterDEX running to be able to execute orders.</p>
+<p>Yes. Atomic swaps needs transactions signed with your private key, so you need to leave BarterDEX running to be able to execute orders.</p>
 <p>Yes, that possibility exists, but for now it’s only done using the Command Line. See the guide in our Guides section explaining what needs to be done.</p>
 </div>
 </div>

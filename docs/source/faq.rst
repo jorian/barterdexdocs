@@ -189,6 +189,8 @@ These fees do not take standard transaction fees into account, which for BarterD
 
 BlockDX uses so-called Service Nodes to be able to do atomic swaps. They are essential in the process of doing an atomic swap; without the Service Nodes, you can't trade. This in stark contrast with BarterDEX, where you don't need Service Nodes to be able to trade. 2 nodes, both running BarterDEX, are able to do an atomic swap between each other, without needing anything else.
 
+To use the BlockDX, you need to download and install the BlockDX wallet. BarterDEX is not tied to any cryptocurrency
+
 At the time of this writing, BlockDX has yet to release (a beta of) their DEX and its source code. Until then, no proper comparison can be made between BlockDX and BarterDEX. It is clear though, that BlockDX is going to be the closest 'competitor' to BarterDEX. 
 
 What are the differences between BarterDEX and Altcoin.io?
@@ -206,7 +208,7 @@ What is a Liquidity Provider (LP) node?
 Do I need to leave BarterDEX running all the time?
 --------------------------------------------------
 
-Yes. Atomic swaps needs signed transactions with your private key, so you need to leave BarterDEX running to be able to execute orders.
+Yes. Atomic swaps needs transactions signed with your private key, so you need to leave BarterDEX running to be able to execute orders.
 
 Yes, that possibility exists, but for now it's only done using the Command Line. See the guide in our Guides section explaining what needs to be done.
 

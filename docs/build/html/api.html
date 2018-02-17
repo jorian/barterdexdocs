@@ -108,6 +108,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#multiple-marketmaker-instances">Multiple marketmaker instances</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#general-commands">General commands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#trade-commands">Trade commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#autoprice">autoprice</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#fixed-price">fixed price</a></li>
@@ -216,6 +217,7 @@ Each command to BarterDEX will need this userpass value as value of the <code cl
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>Replace everything that is shown as &lt;this&gt; with your own data.</p>
 </div>
 <div class="section" id="starting-marketmaker">
 <h2>Starting marketmaker<a class="headerlink" href="#starting-marketmaker" title="Permalink to this headline">¶</a></h2>
@@ -265,10 +267,10 @@ Each command to BarterDEX will need this userpass value as value of the <code cl
 <p>This method will return a response containing the <code class="docutils literal"><span class="pre">userpass</span></code> value for the user passphrase as defined in the <code class="docutils literal"><span class="pre">passphrase</span></code> method.</p>
 </div>
 <div class="section" id="new-or-private-network">
-<h3>New or private network<a class="headerlink" href="#new-or-private-network" title="Permalink to this headline">¶</a></h3>
+<span id="id1"></span><h3>New or private network<a class="headerlink" href="#new-or-private-network" title="Permalink to this headline">¶</a></h3>
 <p>In order to start a network other than the default network, you need to add at least 2 arguments to the <code class="docutils literal"><span class="pre">marketmaker</span></code> startup arguments. When initiating a new network, a full relay node must be used, and it has to define <code class="docutils literal"><span class="pre">&quot;netid&quot;:&lt;int</span> <span class="pre">netid&gt;</span></code> and <code class="docutils literal"><span class="pre">&quot;seednode&quot;:&quot;&lt;ipaddress&gt;&quot;</span></code> to the marketmaker startup arguments, where the netid is any integer higher than 0 but lower than 14420. The seednode is the ip address of the server being a full relay node.</p>
 <p>Non-relay nodes (<code class="docutils literal"><span class="pre">client</span></code>) need to use the same 2 arguments in its startup arguments, to be able to join that network.</p>
-<p>At default, the RPC port for a marketmaker instance is 7783. To override this setting, add <code class="docutils literal"><span class="pre">&quot;rpcport&quot;:&lt;int</span> <span class="pre">port&gt;</span></code> to the startup arguments. This port can be any port in the range 1025 - 65535. Defining the RPC port is for local networking; other nodes in the network do not have to comply with RPC port settings.</p>
+<p>At default, the RPC port for a marketmaker instance is 7783. To override this setting, add <code class="docutils literal"><span class="pre">&quot;rpcport&quot;:&lt;int</span> <span class="pre">port&gt;</span></code> to the startup arguments. This port can be any port in the range 1025 - 65535. Defining the RPC port is for local networking; other nodes in the network do not have to comply by having the same RPC port settings.</p>
 </div>
 <div class="section" id="multiple-marketmaker-instances">
 <h3>Multiple marketmaker instances<a class="headerlink" href="#multiple-marketmaker-instances" title="Permalink to this headline">¶</a></h3>
@@ -276,6 +278,16 @@ Each command to BarterDEX will need this userpass value as value of the <code cl
 <p>When initiating a new network, apart from defining the <code class="docutils literal"><span class="pre">netid</span></code>, the <code class="docutils literal"><span class="pre">seednode</span></code> has to be defined too. As long as the combination of <code class="docutils literal"><span class="pre">netid</span></code> and <code class="docutils literal"><span class="pre">seednode</span></code> does not exist yet, a new network will be created. Therefore, multiple networks can exist with <code class="docutils literal"><span class="pre">netid:0</span></code>, each with a different orderbook. The <code class="docutils literal"><span class="pre">seednode</span></code> is essential for defining multiple networks using the same <code class="docutils literal"><span class="pre">netid</span></code>. When no <code class="docutils literal"><span class="pre">seednode</span></code> is defined, the <a class="reference external" href="https://github.com/jl777/SuperNET/blob/dev/iguana/exchanges/LP_nativeDEX.c#L141">default seednodes</a> are used, which essentially are the seednodes of the main BarterDEX network. No new network will then be created; the <code class="docutils literal"><span class="pre">marketmaker</span></code> instance will be joining the existing, main BarterDEX network.</p>
 <p>This basically means that an almost infinite number of BarterDEX networks can be created, using the <code class="docutils literal"><span class="pre">netid</span></code> and <code class="docutils literal"><span class="pre">seednode</span></code> startup arguments for <code class="docutils literal"><span class="pre">marketmaker</span></code>.</p>
 </div>
+</div>
+<div class="section" id="general-commands">
+<h2>General commands<a class="headerlink" href="#general-commands" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>fetching orderbook</li>
+<li>get coin info, smart addy etc</li>
+<li>balance(s)</li>
+<li>listunspent</li>
+<li>swapstatus</li>
+</ul>
 </div>
 <div class="section" id="trade-commands">
 <h2>Trade commands<a class="headerlink" href="#trade-commands" title="Permalink to this headline">¶</a></h2>
