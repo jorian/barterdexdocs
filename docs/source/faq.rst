@@ -181,8 +181,8 @@ First of all, the fees:
 =========   ======= =========
 fees:       BlockDX BarterDEX
 =========   ======= =========
-Maker-fee   0.05%   0.15%
-Taker-fee   0.20%   none
+Maker-fee   0.05%   none
+Taker-fee   0.20%   0.15%
 =========   ======= =========
 
 These fees do not take standard transaction fees into account, which for BarterDEX is based on the amount of transactions necessary to do an atomic swap (3 for maker, 4 for taker). BlockDX is (at the time of this writing) not yet live, so nothing can be said of how many standard transaction fees they require. 
