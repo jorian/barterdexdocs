@@ -47,7 +47,7 @@ Electrum lets you use the blockchain of the coin you want to trade, without havi
 
 Electrum is a Simple Payment Verification (SPV) service, somewhere on a server, that can be used to verify transactions on the network of the selected coin, without having to expose your private key. This means you can use this SPV service instead of going through the hassle of downloading the wallet of your coin, synchronizing the blockchain etc. 
 
-Native is when you download, install and sync the wallet of the coin you want to trade. It is faster and more stable than using Electrum, for now. It is highly recommended for Liquidity Providers to use Native and not to use Electrum.
+Native is when you download, install and sync the wallet of the coin you want to trade. Trading with native wallets is faster and more stable than using Electrum. It is highly recommended for Liquidity Providers to use Native and not to use Electrum.
 
 What are Zcredits?
 ------------------
@@ -176,7 +176,7 @@ What are the differences between BarterDEX and BlockNET DX?
 
 BlockNET DX, or BlockDX, is a coin which focus solely lies on creating a Decentralized Exchange. The differences between BarterDEX and BlockDX are subtle, but important.
 
-First of all, the fees:
+1. First of all, the fees:
 
 =========   ======= =========
 fees:       BlockDX BarterDEX
@@ -185,11 +185,11 @@ Maker-fee   0.05%   none
 Taker-fee   0.20%   0.15%
 =========   ======= =========
 
-These fees do not take standard transaction fees into account, which for BarterDEX is based on the amount of transactions necessary to do an atomic swap (3 for maker, 4 for taker). BlockDX is (at the time of this writing) not yet live, so nothing can be said of how many standard transaction fees they require. 
+These fees do not take standard transaction fees into account, which for BarterDEX is based on the amount of transactions necessary to do an atomic swap (4 for maker, 3 for taker). BlockDX is (at the time of this writing) not yet live, so nothing can be said of how many standard transaction fees they require. 
 
-BlockDX uses so-called Service Nodes to be able to do atomic swaps. They are essential in the process of doing an atomic swap; without the Service Nodes, you can't trade. This in stark contrast with BarterDEX, where you don't need Service Nodes to be able to trade. 2 nodes, both running BarterDEX, are able to do an atomic swap between each other, without needing anything else.
+2. BlockDX uses so-called Service Nodes to be able to do atomic swaps. They are essential in the process of doing an atomic swap; without the Service Nodes, you can't trade. This in stark contrast with BarterDEX, where you don't need Service Nodes to be able to trade. 2 nodes, both running BarterDEX, are able to do an atomic swap between each other, without needing anything else.
 
-To use the BlockDX, you need to download and install the BlockDX wallet. BarterDEX is not tied to any cryptocurrency
+3. To use the BlockDX, you need to download and install the BlockDX wallet. BarterDEX is not tied to any cryptocurrency; all you need is the marketmaker executable that gives you access to BarterDEX networks.
 
 At the time of this writing, BlockDX has yet to release (a beta of) their DEX and its source code. Until then, no proper comparison can be made between BlockDX and BarterDEX. It is clear though, that BlockDX is going to be the closest 'competitor' to BarterDEX. 
 
