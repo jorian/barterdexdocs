@@ -80,6 +80,10 @@ A node that doesn't relay (client node) has the following marketmaker startup ar
 - ``passphrase`` is the passphrase that is needed by ``marketmaker`` to determine the userpass and all smartaddresses that BarterDEX is going to use. 
 - ``coins`` needs a JSON of all BarterDEX-enabled coins. Not all cryptocurrencies are able to do atomic swaps, because they lack CheckLockTimeVerify (BIP65) or one of the necessary Bitcoin API methods (See :ref:`how-to-get-listed` for details).
 
+Optional:
+
+- ``wif`` when set to 1, the ``setpassphrase`` API call will show WIF addresses for all smartaddresses.
+
 After ``marketmaker`` started successfully, the first RPC to be issued will always return a ``getcoin``  <REF TO GETCOIN> call for all coins, using 'default' as the default passphrase. This will also return the default userpass, which will need to be used to set the passphrase of the user, using the ``passphrase`` api call:
 
 .. code-block:: json
