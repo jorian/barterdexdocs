@@ -36,9 +36,6 @@ Note that apart from supporting the above requirements, no additional custom cod
 
 .. _BIP65 (Check LockTime Verify): https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki
 
-How does the BarterDEX trading mechanism work?
-----------------------------------------------
-
 
 Electrum or Native?
 -------------------
@@ -96,10 +93,6 @@ Is it free to cancel an order?
 
 Yes. Placing orders and sending a request doesn't cost you anything. Only when your request has found a willing trade partner and a connection has been established, the dexfee and transaction fees will be paid.
 
-How do I cancel an order?
--------------------------
-
-This touches on the specifics of BarterDEX being a glorified auction instead of an exchange. <MORE INFO NEEDED>
 
 How do I get the private key of my smartaddress?
 ------------------------------------------------
@@ -193,17 +186,6 @@ These fees do not take standard transaction fees into account, which for BarterD
 
 At the time of this writing, BlockDX has yet to release (a beta of) their DEX and its source code. Until then, no proper comparison can be made between BlockDX and BarterDEX. It is clear though, that BlockDX is going to be the closest 'competitor' to BarterDEX. 
 
-What are the differences between BarterDEX and Altcoin.io?
-----------------------------------------------------------
-
-What are the differences between BarterDEX and Waves DEX?
----------------------------------------------------------
-
-Can I privately swap coins with another person?
------------------------------------------------
-
-What is a Liquidity Provider (LP) node?
----------------------------------------
 
 Do I need to leave BarterDEX running all the time?
 --------------------------------------------------

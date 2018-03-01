@@ -1,18 +1,7 @@
 Guides
 ======
 
-How to use your native wallet with BarterDEX
---------------------------------------------
-
-- make sure to have valid .conf file set, with at least a rpcuser and (strong!) rpcpassword
-- when a transaction was sent to the smartaddress after using it for the first time, the wallet needs to be rescanned. 
-
-<coin>d -rescan in CLI
-start <coin>-qt from CLI and add -rescan
- 
-
-How to build BarterDEX from source
-----------------------------------
+.. _cli-manual-installation-guide:
 
 How to use BarterDEX using CLI
 ------------------------------
@@ -136,16 +125,9 @@ Insomnia is a great tool to replace the terminal window, but still be able to is
 Download Insomnia here: https://insomnia.rest
 
 
-
-How to become a Liquidity Provider
-----------------------------------
-
 How to create a new BarterDEX trading network
 ---------------------------------------------
 
 Since BarterDEX is a peer-to-peer network, seeded by some ip-addresses to create the network, others can create a BarterDEX network of their own. This enables people to trade within a private group of traders, or to trade directly from person to person.
 
 See :ref:`new-or-private-network` in the API docs on how to do this.
-
-How to claim a 0-conf deposit manually
---------------------------------------

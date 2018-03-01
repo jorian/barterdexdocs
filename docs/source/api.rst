@@ -6,9 +6,9 @@ WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK I
 Introduction
 ------------
 
-BarterDEX uses a custom-made peer-to-peer network and has Remote Procedure Calls (RPC) to talk with and get information from the BarterDEX network. If you installed BarterDEX by following the <INSERT LINK TO THAT GUIDE HERE> CLI manual installation guide, you'll have a lot of these commands ready to use in the ``~/SuperNET/iguana/dexscripts`` folder. These API docs will explain what each command does and what the possible arguments for each method are.
+BarterDEX uses a custom-made peer-to-peer network and has Remote Procedure Calls (RPC) to talk with and get information from the BarterDEX network. If you installed BarterDEX by following the :ref:`cli-manual-installation-guide` guide, you'll have a lot of these commands ready to use in the ``~/SuperNET/iguana/dexscripts`` folder. These API docs will explain what each command does and what the possible arguments for each method are.
 
-``marketmaker`` is the process that is started on a machine.
+``marketmaker`` is the system process that is started on a machine.
 
 You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your machine (see below).
 
@@ -82,7 +82,7 @@ A node that doesn't relay (client node) has the following marketmaker startup ar
 
 Optional:
 
-- ``wif`` when set to 1, the ``setpassphrase`` API call will show WIF addresses for all smartaddresses.
+- ``wif`` when set to 1, the ``setpassphrase`` API call will show WIF keys for all smartaddresses.
 
 After ``marketmaker`` started successfully, the first RPC to be issued will always return a ``getcoin``  <REF TO GETCOIN> call for all coins, using 'default' as the default passphrase. This will also return the default userpass, which will need to be used to set the passphrase of the user, using the ``passphrase`` api call:
 
@@ -209,7 +209,7 @@ sendrawtransaction
 Docker
 ------
 
-lukechilds has provided a `docker image`_ for BarterDEX.
+lukechilds has provided a `docker image for BarterDEX`_.
 
-.. _docker image: https://github.com/lukechilds/docker-barterdex-api
+.. _docker image for BarterDEX: https://github.com/lukechilds/docker-barterdex-api
 
