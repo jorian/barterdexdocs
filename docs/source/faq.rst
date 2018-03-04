@@ -19,17 +19,18 @@ How to get listed on BarterDEX?
 The requirements for a coin to be able to do an atomic swap are:
 
 - have `BIP65 (Check LockTime Verify)`_ implemented;
-- support the following standard Bitcoin API methods:
+- support the following standard Bitcoin API methods ( http://chainquery.com/bitcoin-api )
 
 .. code-block:: bash
 
     estimatefee			importaddress
     getblock 			importprivkey
     getblockhash		listunspent
-    getinfo			listtransactions	
-    getrawmempool 		validateaddress
-    getrawtransaction		sendrawtransaction
-    gettxout 			signrawtransaction
+    getinfo			listreceivedbyaddress
+    getrawmempool 		listtransactions
+    getrawtransaction		validateaddress
+    gettxout 			sendrawtransaction
+    				signrawtransaction
 
 Note that apart from supporting the above requirements, no additional custom code is needed to be able to trade on BarterDEX. (This in contrast to the misinformation being spread on several forums, where is stated that BarterDEX requires customizations to coins)
 
