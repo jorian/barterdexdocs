@@ -113,7 +113,7 @@ There are no maker fees.
 
 You also pay the standard transaction fees, for sending the payment to the other party.
 
-The dexfees are collected in a specific address, generated from the rmd160 hash ca1e04745e8ca0c60d8c5881531d51bec470743f. For Komodo, this is `RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf`_ Once a significant amount of fees are collected, the fees are paid as dividend to DEX assetholders. DEX is a Komodo asset and can be traded on BarterDEX.
+The dexfees are collected in a specific address, generated from the rmd160 hash ca1e04745e8ca0c60d8c5881531d51bec470743f. For KMD, this is `RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf`_, BTC: `1KRhTPvoxyJmVALwHFXZdeeWFbcJSbkFPu`_. Once a significant amount of fees are collected, the fees are paid as dividend to DEX assetholders. DEX is a Komodo asset and can be traded on BarterDEX.
 
 
 Currently supported coins
@@ -197,6 +197,7 @@ Yes. Atomic swaps needs transactions signed with your private key, so you need t
 
 Yes, that possibility exists, but for now it's only done using the Command Line. See the guide in our Guides section explaining what needs to be done.
 
+.. _1KRhTPvoxyJmVALwHFXZdeeWFbcJSbkFPu: https://blockexplorer.com/address/1KRhTPvoxyJmVALwHFXZdeeWFbcJSbkFPu
 .. _RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf: https://kmd.explorer.supernet.org/address/RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf
 .. _JUMBLR: https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/
 .. _CRYPTO777: https://nxtforum.org/consensus-research/crypto777/
