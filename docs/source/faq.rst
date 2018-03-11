@@ -98,20 +98,22 @@ Yes. Placing orders and sending a request doesn't cost you anything. Only when y
 How do I get the private key of my smartaddress?
 ------------------------------------------------
 
-BarterDEX uses watch-only addresses, which basically means that BarterDEX is a trade wallet. The passphrase you enter when starting BarterDEX is the access to your coins. 
+BarterDEX uses watch-only addresses, which basically means that BarterDEX is a trade wallet. The passphrase you enter when starting BarterDEX is the access to your trade wallet and thus, coins. 
 
-For now, it requires starting ``marketmaker`` from the command line to retrieve the actual private keys of your smartaddresses. You do this by adding ``"wif":1`` to the marketmaker startup arguments json. In the initial ``getcoin`` that marketmaker does, it will return all wifs for each smartaddress.
+It requires starting ``marketmaker`` from the command line to retrieve all private keys of all the smartaddresses, based on the passphrase. You do this by adding ``"wif":1`` to the marketmaker startup arguments json. In the initial ``getcoin`` that marketmaker does, it will return all wifs for each smartaddress.
+
+For Komodo formatted addresses, it is possible to do the :ref:`api_calcaddress` api call.
 
 How much are the fees?
 ----------------------
 
-Fees for using the exchange exist in paying a dexfee, to be paid by alice (the one initiating the trade), also called the maker fee. This is about 0.15% of the alicepayment - the amount you're sending to the other party.
+Fees for using the exchange exist in paying a dexfee, to be paid by alice (the one initiating the trade), also called the taker fee. This is about 0.15% of the alicepayment - the amount you're sending to the other party.
 
-There are no taker fees.
+There are no maker fees.
 
 You also pay the standard transaction fees, for sending the payment to the other party.
 
-The dexfees are collected and once a significant amount of fees are collected, the fees are paid as dividend to the DEX assetholders, which is also tradeable on BarterDEX.
+The dexfees are collected in a specific address, generated from the rmd160 hash ca1e04745e8ca0c60d8c5881531d51bec470743f. For Komodo, this is `RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf`_ Once a significant amount of fees are collected, the fees are paid as dividend to DEX assetholders. DEX is a Komodo asset and can be traded on BarterDEX.
 
 
 Currently supported coins
@@ -195,6 +197,7 @@ Yes. Atomic swaps needs transactions signed with your private key, so you need t
 
 Yes, that possibility exists, but for now it's only done using the Command Line. See the guide in our Guides section explaining what needs to be done.
 
+.. _RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf: https://kmd.explorer.supernet.org/address/RThtXup6Zo7LZAi8kRWgjAyi1s4u6U9Cpf
 .. _JUMBLR: https://nxtforum.org/nxtservices-releases/jumblr-decentralized-bitcoin-mixer-seeking-marketing-lead-and-also-gui-dev/
 .. _CRYPTO777: https://nxtforum.org/consensus-research/crypto777/
 .. _Komodo Platform assetchains: https://www.komodoplatform.com/en/blog/komodo-smart-contracts-assetchains-and-geckochains

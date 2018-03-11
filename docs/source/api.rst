@@ -30,11 +30,11 @@ The json code in all the methods below is the data that is needed for each metho
 .. code-block:: json
 
    {
-   	"userpass":"<userpass>",
-   	"method":"autoprice",
-   	"base":"KMD",
-   	"rel":"BTC",
-   	"margin":0.0001
+   	"userpass": "<userpass>",
+   	"method": "autoprice",
+   	"base": "KMD",
+   	"rel": "BTC",
+   	"margin": 0.0001
    }
 
 Replace everything that is shown as <this> with your own data.
@@ -54,11 +54,11 @@ A full relay node (LP node) is started by running marketmaker with the following
 .. code-block:: json
 
    {
-	"gui":"<name of gui>", 
-	"profitmargin":0.01,
-	"userhome":"<userhome> + /",  
-	"passphrase":"<passphrase>", 
-	"coins":["<coins>"] 
+	"gui": "<name of gui>", 
+	"profitmargin": 0.01,
+	"userhome": "<userhome> + /",  
+	"passphrase": "<passphrase>", 
+	"coins": ["<coins>"] 
    }
 
 A node that doesn't relay (client node) has the following marketmaker startup arguments:
@@ -66,11 +66,11 @@ A node that doesn't relay (client node) has the following marketmaker startup ar
 .. code-block:: json
 
    {
-	"gui":"<name of gui>",
-	"client":1,
-	"userhome":"<userhome> + /", 
-	"passphrase":"<passphrase>", 
-	"coins":["<coins>"]
+	"gui": "<name of gui>",
+	"client": 1,
+	"userhome": "<userhome> + /", 
+	"passphrase": "<passphrase>", 
+	"coins": ["<coins>"]
    }
 
 - ``gui`` is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI. 
@@ -89,11 +89,11 @@ After ``marketmaker`` started successfully, the first RPC to be issued will alwa
 .. code-block:: json
 
    {
-	"userpass":"1d8b27b21efabcd96571cd56f91a40fb9aa4cc623d273c63bf9223dc6f8cd81f",
-	"method":"passphrase",
-	"passphrase":"<passphrase>",
-	"gui":"<name of gui>",
-	"netid":0
+	"userpass": "1d8b27b21efabcd96571cd56f91a40fb9aa4cc623d273c63bf9223dc6f8cd81f",
+	"method": "passphrase",
+	"passphrase": "<passphrase>",
+	"gui": "<name of gui>",
+	"netid": 0
    }
 
 The ``netid`` needs to be defined when using a ``netid`` other than 0.
@@ -125,6 +125,70 @@ This basically means that an almost infinite number of BarterDEX networks can be
 General commands
 ----------------
 
+.. _api_orderbook:
+
+orderbook
+^^^^^^^^^
+
+One of the most important calls in an exchange: getting to see the orderbook for a specific pair.
+
+.. code-block:: json
+
+    {
+        "userpass": "<userpass>",
+        "method": "orderbook",
+        "base": "<base_coin>",
+        "rel": "<rel_coin>"
+    }
+
+Output:
+
+.. code-block:: json
+
+    {
+        "bids": [
+            {
+                "coin": "KMD",
+                "address": "RKdCvGQZbjUf51ae6xsNu5by8tZL5ztjhW",
+                "price": 0.11011000,
+                "numutxos": 0,
+                "avevolume": 0,
+                "maxvolume": 0,
+                "depth": 0,
+                "pubkey": "89274a7a0e93b850edb34907250ce9e3d3217b3d864326d0553bf3592a535c05",
+                "age": 55,
+                "zcredits": 0
+            }
+        ],
+        "numbids": 1,
+        "biddepth": 0,
+        "asks": [
+            {
+                "coin": "BTC",
+                "address": "RK5xVwfd1Qf8iuTymMUUri22rYxDW3396R",
+                "price": 0.10000000,
+                "numutxos": 4,
+                "avevolume": 2.23920003,
+                "maxvolume": 2.40000003,
+                "depth": 8.95680013,
+                "pubkey": "198a41d6259ab7585d7dd566966375d21361d191d59c698bf3d6e9f47df99f7c",
+                "age": 20,
+                "zcredits": 0
+            }
+        ],
+        "numasks": 1,
+        "askdepth": 11.19600016,
+        "base": "GACREDIT",
+        "rel": "KMD",
+        "timestamp": 1520187231,
+        "netid": 0
+    }
+
+
+Optional:
+
+
+
 - fetching orderbook
 - get coin info, smart addy etc
 - balance(s)
@@ -132,7 +196,7 @@ General commands
 - swapstatus
 
 
-Trade commands
+Price commands
 --------------
 
 Most, if not all, of the trade commands use the base/rel notation of pricing orders.
@@ -152,11 +216,11 @@ The following command puts an ask in the BTC/KMD orderbook and basically says: '
 .. code-block:: json
    
    {
-   	"userpass":"$userpass",
-   	"method":"autoprice",
-   	"base":"KMD",
-   	"rel":"BTC",
-   	"fixed":1800
+   	"userpass": "<userpass>",
+   	"method": "autoprice",
+   	"base": "KMD",
+   	"rel": "BTC",
+   	"fixed": 1800
    }
 
 price with margin
@@ -167,11 +231,11 @@ price with margin
 .. code-block:: json
    
    {
-   	"userpass":"$userpass",
-   	"method":"autoprice",
-   	"base":"KMD",
-   	"rel":"BTC",
-   	"margin":0.01
+   	"userpass": "<userpass>",
+   	"method": "autoprice",
+   	"base": "KMD",
+   	"rel": "BTC",
+   	"margin": 0.01
    }
 
 price based on external data
@@ -184,13 +248,13 @@ The following command would refresh the price of the order in the orderbook base
 .. code-block:: json
    
    {
-   	"userpass":"$userpass",
-   	"method":"autoprice",
-   	"base":"KMD",
-   	"rel":"BTC",
-   	"margin":0.05,
-	"refbase":"kmd",
-	"refrel":"coinmarketcap"
+   	"userpass": "<userpass>",
+   	"method": "autoprice",
+   	"base": "KMD",
+   	"rel": "BTC",
+   	"margin": 0.05,
+	"refbase": "kmd",
+	"refrel": "coinmarketcap"
    }
 
 .. note::
@@ -205,6 +269,35 @@ withdraw
 
 sendrawtransaction
 ^^^^^^^^^^^^^^^^^^
+
+Address tools
+-------------
+
+.. _api_calcaddress:
+
+calcaddress
+^^^^^^^^^^^
+
+Returns the address, wif and public key for the passphrase defined.
+
+.. code-block:: json
+   
+   {
+   	"userpass": "<userpass>",
+   	"method": "calcaddress",
+   	"passphrase": "<passphrase>"
+   }
+
+Output (for passphrase ``default``):
+
+.. code-block:: json
+
+   {
+	"passphrase": "default",
+	"coinaddr": "RPZVpjptzfZnFZZoLnuSbfLexjtkhe6uvn",
+	"privkey": "30a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0684f",
+	"wif": "Uqe8cy26KvC2xqfh3aCpKvKjtoLC5YXiDW3iYf4MGSSy1RgMm3V5"
+   }
 
 Docker
 ------
