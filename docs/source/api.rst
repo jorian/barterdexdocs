@@ -148,7 +148,7 @@ Output:
     {
         "bids": [
             {
-                "coin": "KMD",
+                "coin": "<rel_coin>",
                 "address": "RKdCvGQZbjUf51ae6xsNu5by8tZL5ztjhW",
                 "price": 0.11011000,
                 "numutxos": 0,
@@ -164,7 +164,7 @@ Output:
         "biddepth": 0,
         "asks": [
             {
-                "coin": "BTC",
+                "coin": "<base_coin>",
                 "address": "RK5xVwfd1Qf8iuTymMUUri22rYxDW3396R",
                 "price": 0.10000000,
                 "numutxos": 4,
@@ -178,8 +178,8 @@ Output:
         ],
         "numasks": 1,
         "askdepth": 11.19600016,
-        "base": "GACREDIT",
-        "rel": "KMD",
+        "base": "<base_coin>",
+        "rel": "<rel_coin>",
         "timestamp": 1520187231,
         "netid": 0
     }
