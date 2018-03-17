@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API docs &mdash; BarterDEX 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="BarterDEX 0.1 documentation" href="index.html"/>
+        <link rel="next" title="Whitepaper" href="whitepaper.html"/>
+        <link rel="prev" title="Guides" href="guides.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> BarterDEX
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with BarterDEX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides.html">Guides</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-marketmaker">Starting marketmaker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#startup-arguments">Startup arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-or-private-network">New or private network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-marketmaker-instances">Multiple marketmaker instances</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#general-commands">General commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#orderbook">orderbook</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#price-commands">Price commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#autoprice">autoprice</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fixed-price">fixed price</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#price-with-margin">price with margin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#price-based-on-external-data">price based on external data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utxo-tools">UTXO tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#withdraw">withdraw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sendrawtransaction">sendrawtransaction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#address-tools">Address tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#calcaddress">calcaddress</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#docker">Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="whitepaper.html">Whitepaper</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BarterDEX</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>API docs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-docs">
+<h1>API docs<a class="headerlink" href="#api-docs" title="Permalink to this headline">¶</a></h1>
+<p>WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK IN PROGRESS!</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>BarterDEX uses a custom-made peer-to-peer network and has Remote Procedure Calls (RPC) to talk with and get information from the BarterDEX network. If you installed BarterDEX by following the <a class="reference internal" href="guides.html#cli-manual-installation-guide"><span class="std std-ref">How to use BarterDEX using CLI</span></a> guide, you’ll have a lot of these commands ready to use in the <code class="docutils literal"><span class="pre">~/SuperNET/iguana/dexscripts</span></code> folder. These API docs will explain what each command does and what the possible arguments for each method are.</p>
+<p><code class="docutils literal"><span class="pre">marketmaker</span></code> is the system process that is started on a machine.</p>
+<p>You need to set a strong passphrase (prior to starting marketmaker) and userpass to be able to talk to BarterDEX using RPC. The passphrase is what determines the addresses and the userpass value, and will be needed in the startup arguments when starting the marketmaker process on your machine (see below).</p>
+<p>Curl can be used to send commands, see the following example taken from the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">source</span> userpass
+curl --url <span class="s2">&quot;http://127.0.0.1:7783&quot;</span> --data <span class="s2">&quot;{\&quot;userpass\&quot;:\&quot;</span><span class="nv">$userpass</span><span class="s2">\&quot;,\&quot;method\&quot;:\&quot;autoprice\&quot;,\&quot;base\&quot;:\&quot;KMD\&quot;,\&quot;rel\&quot;:\&quot;BTC\&quot;,\&quot;margin\&quot;:0.0001}&quot;</span>
+</pre></div>
+</div>
+<p>The userpass is sourced from the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder, so that file has to be created in the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder prior to sending a command. The userpass is there to prevent bad actors from issuing RPC commands. Marketmaker will not work without it set.
+Each command to BarterDEX will need this userpass value as value of the <code class="docutils literal"><span class="pre">userpass</span></code> key in the JSON.</p>
+<p><code class="docutils literal"><span class="pre">127.0.0.1:7783</span></code> is the ip address and port where BarterDEX is listening for commands at default, when no rpcport is defined in the startup arguments.</p>
+<p>The json code in all the methods below is the data that is needed for each method described (mind the escape characters when using shell). For example:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userpass&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;margin&quot;</span><span class="p">:</span> <span class="mf">0.0001</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Replace everything that is shown as &lt;this&gt; with your own data.</p>
+</div>
+<div class="section" id="starting-marketmaker">
+<h2>Starting marketmaker<a class="headerlink" href="#starting-marketmaker" title="Permalink to this headline">¶</a></h2>
+<p>There are two different nodes in BarterDEX: a full relay node (Liquidity Provider, or LP, node) and a node that doesn’t relay (client node). In the <code class="docutils literal"><span class="pre">dexscripts</span></code> folder, these are started by <code class="docutils literal"><span class="pre">./run</span></code> or <code class="docutils literal"><span class="pre">./client</span></code>, respectively. Normally, only Liquidity Providers will prefer a full relay node, as they can respond to incoming requests one hop sooner. Others will use <code class="docutils literal"><span class="pre">./client</span></code>, since it doesn’t require as much bandwidth as a full relay node and can therefore be perfect for regular traders on BarterDEX.</p>
+<div class="section" id="startup-arguments">
+<h3>Startup arguments<a class="headerlink" href="#startup-arguments" title="Permalink to this headline">¶</a></h3>
+<p>The following startup arguments need to be provided when starting the marketmaker binaries.</p>
+<p>A full relay node (LP node) is started by running marketmaker with the following arguments string:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;gui&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;name of gui&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;profitmargin&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+     <span class="nt">&quot;userhome&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userhome&gt; + /&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;passphrase&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;passphrase&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;coins&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&lt;coins&gt;&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A node that doesn’t relay (client node) has the following marketmaker startup arguments:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;gui&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;name of gui&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;client&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+     <span class="nt">&quot;userhome&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userhome&gt; + /&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;passphrase&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;passphrase&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;coins&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;&lt;coins&gt;&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">gui</span></code> is the codename for the GUI used to start marketmaker with. If you are the developer of a GUI, you need to define a codename for your GUI. Share this in the Komodo Platform slack and you will get paid for every trade a user makes using your GUI.</li>
+<li><code class="docutils literal"><span class="pre">profitmargin</span></code> is the default profitmargin that this LP node will use when placing orders in orderbooks using the <code class="docutils literal"><span class="pre">autoprice</span></code> method.</li>
+<li><code class="docutils literal"><span class="pre">client</span></code>: when set to 1, it defines a client node.</li>
+<li><code class="docutils literal"><span class="pre">userhome</span></code> is the location of the userhome.</li>
+<li><code class="docutils literal"><span class="pre">passphrase</span></code> is the passphrase that is needed by <code class="docutils literal"><span class="pre">marketmaker</span></code> to determine the userpass and all smartaddresses that BarterDEX is going to use.</li>
+<li><code class="docutils literal"><span class="pre">coins</span></code> needs a JSON of all BarterDEX-enabled coins. Not all cryptocurrencies are able to do atomic swaps, because they lack CheckLockTimeVerify (BIP65) or one of the necessary Bitcoin API methods (See <a class="reference internal" href="faq.html#how-to-get-listed"><span class="std std-ref">How to get listed on BarterDEX?</span></a> for details).</li>
+</ul>
+<p>Optional:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">wif</span></code> when set to 1, the <code class="docutils literal"><span class="pre">setpassphrase</span></code> API call will show WIF keys for all smartaddresses.</li>
+</ul>
+<p>After <code class="docutils literal"><span class="pre">marketmaker</span></code> started successfully, the first RPC to be issued will always return a <code class="docutils literal"><span class="pre">getcoin</span></code>  &lt;REF TO GETCOIN&gt; call for all coins, using ‘default’ as the default passphrase. This will also return the default userpass, which will need to be used to set the passphrase of the user, using the <code class="docutils literal"><span class="pre">passphrase</span></code> api call:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span> <span class="s2">&quot;1d8b27b21efabcd96571cd56f91a40fb9aa4cc623d273c63bf9223dc6f8cd81f&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;passphrase&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;passphrase&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;passphrase&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;gui&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;name of gui&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;netid&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">netid</span></code> needs to be defined when using a <code class="docutils literal"><span class="pre">netid</span></code> other than 0.</p>
+<p>This method will return a response containing the <code class="docutils literal"><span class="pre">userpass</span></code> value for the user passphrase as defined in the <code class="docutils literal"><span class="pre">passphrase</span></code> method.</p>
+</div>
+<div class="section" id="new-or-private-network">
+<span id="id1"></span><h3>New or private network<a class="headerlink" href="#new-or-private-network" title="Permalink to this headline">¶</a></h3>
+<p>In order to start a network other than the default network, you need to add at least 2 arguments to the <code class="docutils literal"><span class="pre">marketmaker</span></code> startup arguments. When initiating a new network, a full relay node must be used, and it has to define <code class="docutils literal"><span class="pre">&quot;netid&quot;:&lt;int</span> <span class="pre">netid&gt;</span></code> and <code class="docutils literal"><span class="pre">&quot;seednode&quot;:&quot;&lt;ipaddress&gt;&quot;</span></code> to the marketmaker startup arguments, where the netid is any integer higher than 0 but lower than 14420. The seednode is the ip address of the server being a full relay node.</p>
+<p>Non-relay nodes (<code class="docutils literal"><span class="pre">client</span></code>) need to use the same 2 arguments in its startup arguments, to be able to join that network.</p>
+<p>At default, the RPC port for a marketmaker instance is 7783. To override this setting, add <code class="docutils literal"><span class="pre">&quot;rpcport&quot;:&lt;int</span> <span class="pre">port&gt;</span></code> to the startup arguments. This port can be any port in the range 1025 - 65535. Defining the RPC port is for local networking; other nodes in the network do not have to comply by having the same RPC port settings.</p>
+</div>
+<div class="section" id="multiple-marketmaker-instances">
+<h3>Multiple marketmaker instances<a class="headerlink" href="#multiple-marketmaker-instances" title="Permalink to this headline">¶</a></h3>
+<p>Multiple instances of marketmaker on the same machine are possible, by defining a different <code class="docutils literal"><span class="pre">netid</span></code>, <code class="docutils literal"><span class="pre">seednode</span></code> (optional) and <code class="docutils literal"><span class="pre">rpcport</span></code>. For example: One node is joining an existing network using <code class="docutils literal"><span class="pre">netid:0</span></code> and <code class="docutils literal"><span class="pre">rpcport:8800</span></code>. A second instance of marketmaker can now be started with <code class="docutils literal"><span class="pre">netid:1</span></code> and <code class="docutils literal"><span class="pre">rpcport:8810</span></code>. Each node has now access to a different network, and thus a different orderbook.</p>
+<p>When initiating a new network, apart from defining the <code class="docutils literal"><span class="pre">netid</span></code>, the <code class="docutils literal"><span class="pre">seednode</span></code> has to be defined too. As long as the combination of <code class="docutils literal"><span class="pre">netid</span></code> and <code class="docutils literal"><span class="pre">seednode</span></code> does not exist yet, a new network will be created. Therefore, multiple networks can exist with <code class="docutils literal"><span class="pre">netid:0</span></code>, each with a different orderbook. The <code class="docutils literal"><span class="pre">seednode</span></code> is essential for defining multiple networks using the same <code class="docutils literal"><span class="pre">netid</span></code>. When no <code class="docutils literal"><span class="pre">seednode</span></code> is defined, the <a class="reference external" href="https://github.com/jl777/SuperNET/blob/dev/iguana/exchanges/LP_nativeDEX.c#L141">default seednodes</a> are used, which essentially are the seednodes of the main BarterDEX network. No new network will then be created; the <code class="docutils literal"><span class="pre">marketmaker</span></code> instance will be joining the existing, main BarterDEX network.</p>
+<p>This basically means that an almost infinite number of BarterDEX networks can be created, using the <code class="docutils literal"><span class="pre">netid</span></code> and <code class="docutils literal"><span class="pre">seednode</span></code> startup arguments for <code class="docutils literal"><span class="pre">marketmaker</span></code>.</p>
+</div>
+</div>
+<div class="section" id="general-commands">
+<h2>General commands<a class="headerlink" href="#general-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="orderbook">
+<span id="api-orderbook"></span><h3>orderbook<a class="headerlink" href="#orderbook" title="Permalink to this headline">¶</a></h3>
+<p>One of the most important calls in an exchange: getting to see the orderbook for a specific pair.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;userpass&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userpass&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;orderbook&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;base_coin&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;rel_coin&gt;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;bids&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;coin&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;rel_coin&gt;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;RKdCvGQZbjUf51ae6xsNu5by8tZL5ztjhW&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">0.11011000</span><span class="p">,</span>
+            <span class="nt">&quot;numutxos&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;avevolume&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;maxvolume&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;pubkey&quot;</span><span class="p">:</span> <span class="s2">&quot;89274a7a0e93b850edb34907250ce9e3d3217b3d864326d0553bf3592a535c05&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
+            <span class="nt">&quot;zcredits&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;numbids&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;biddepth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">&quot;asks&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;coin&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;base_coin&gt;&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;RK5xVwfd1Qf8iuTymMUUri22rYxDW3396R&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;price&quot;</span><span class="p">:</span> <span class="mf">0.10000000</span><span class="p">,</span>
+            <span class="nt">&quot;numutxos&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="nt">&quot;avevolume&quot;</span><span class="p">:</span> <span class="mf">2.23920003</span><span class="p">,</span>
+            <span class="nt">&quot;maxvolume&quot;</span><span class="p">:</span> <span class="mf">2.40000003</span><span class="p">,</span>
+            <span class="nt">&quot;depth&quot;</span><span class="p">:</span> <span class="mf">8.95680013</span><span class="p">,</span>
+            <span class="nt">&quot;pubkey&quot;</span><span class="p">:</span> <span class="s2">&quot;198a41d6259ab7585d7dd566966375d21361d191d59c698bf3d6e9f47df99f7c&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;age&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="nt">&quot;zcredits&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;numasks&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;askdepth&quot;</span><span class="p">:</span> <span class="mf">11.19600016</span><span class="p">,</span>
+    <span class="nt">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;base_coin&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;rel_coin&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1520187231</span><span class="p">,</span>
+    <span class="nt">&quot;netid&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Optional:</p>
+<ul class="simple">
+<li>fetching orderbook</li>
+<li>get coin info, smart addy etc</li>
+<li>balance(s)</li>
+<li>listunspent</li>
+<li>swapstatus</li>
+</ul>
+</div>
+</div>
+<div class="section" id="price-commands">
+<h2>Price commands<a class="headerlink" href="#price-commands" title="Permalink to this headline">¶</a></h2>
+<p>Most, if not all, of the trade commands use the base/rel notation of pricing orders.</p>
+<div class="section" id="autoprice">
+<h3>autoprice<a class="headerlink" href="#autoprice" title="Permalink to this headline">¶</a></h3>
+<p>The autoprice command is a rich command that allows anyone to create an order using data from CoinMarketCap or any other exchange. It refreshes the price every 1-2 minutes, such that once the autoprice command is executed, the order will be in the orderbooks permanently.</p>
+<p>There are several possibilities for autoprice:</p>
+<div class="section" id="fixed-price">
+<h4>fixed price<a class="headerlink" href="#fixed-price" title="Permalink to this headline">¶</a></h4>
+<p>The following command puts an ask in the BTC/KMD orderbook and basically says: ‘I want to get KMD by selling BTC at a fixed price of 1800’. So, anyone who wants to buy BTC with KMD will see this order and can buy 1 BTC for 1800 KMD.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userpass&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;fixed&quot;</span><span class="p">:</span> <span class="mi">1800</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="price-with-margin">
+<h4>price with margin<a class="headerlink" href="#price-with-margin" title="Permalink to this headline">¶</a></h4>
+<p>&lt;NEED TO ASK WHAT THIS DOES EXACTLY&gt;</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userpass&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;margin&quot;</span><span class="p">:</span> <span class="mf">0.01</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="price-based-on-external-data">
+<h4>price based on external data<a class="headerlink" href="#price-based-on-external-data" title="Permalink to this headline">¶</a></h4>
+<p>The following command would refresh the price of the order in the orderbook based on price changes as defined in the <code class="docutils literal"><span class="pre">refrel</span></code> argument:</p>
+<p>&lt;NEED MORE INFO&gt;</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userpass&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;autoprice&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;KMD&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;BTC&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;margin&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+     <span class="nt">&quot;refbase&quot;</span><span class="p">:</span> <span class="s2">&quot;kmd&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;refrel&quot;</span><span class="p">:</span> <span class="s2">&quot;coinmarketcap&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the base and rel need to be uppercase and the refbase needs to be lowercase</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="utxo-tools">
+<h2>UTXO tools<a class="headerlink" href="#utxo-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="withdraw">
+<h3>withdraw<a class="headerlink" href="#withdraw" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="sendrawtransaction">
+<h3>sendrawtransaction<a class="headerlink" href="#sendrawtransaction" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="address-tools">
+<h2>Address tools<a class="headerlink" href="#address-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="calcaddress">
+<span id="api-calcaddress"></span><h3>calcaddress<a class="headerlink" href="#calcaddress" title="Permalink to this headline">¶</a></h3>
+<p>Returns the address, wif and public key for the passphrase defined.</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;userpass&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;userpass&gt;&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;calcaddress&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;passphrase&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;passphrase&gt;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output (for passphrase <code class="docutils literal"><span class="pre">default</span></code>):</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span><span class="p">{</span>
+     <span class="nt">&quot;passphrase&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;coinaddr&quot;</span><span class="p">:</span> <span class="s2">&quot;RPZVpjptzfZnFZZoLnuSbfLexjtkhe6uvn&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;privkey&quot;</span><span class="p">:</span> <span class="s2">&quot;30a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0684f&quot;</span><span class="p">,</span>
+     <span class="nt">&quot;wif&quot;</span><span class="p">:</span> <span class="s2">&quot;Uqe8cy26KvC2xqfh3aCpKvKjtoLC5YXiDW3iYf4MGSSy1RgMm3V5&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<p>lukechilds has provided a <a class="reference external" href="https://github.com/lukechilds/docker-barterdex-api">docker image for BarterDEX</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="whitepaper.html" class="btn btn-neutral float-right" title="Whitepaper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="guides.html" class="btn btn-neutral" title="Guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Jorian.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
