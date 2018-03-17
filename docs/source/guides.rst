@@ -58,7 +58,7 @@ Installation is the same for Linux and MacOS. Start by cloning the SuperNET repo
 
     git clone https://github.com/jl777/SuperNET -b dev
 
-This will download all the files necessary to start using BarterDEX from the command line. It uses the Development branch, assuring you with the latest updates. If you don't want this, type ``git checkout master`` to work with more stable releases.
+This will download all the files necessary to start using BarterDEX from the command line. It uses the Development branch, assuring you with the latest updates. If you don't want this, type ``git checkout master`` to work with more stable releases. If you want the very latest, untested changes, type ``git checkout jl777``.
 
 Now navigate to the SuperNET folder and execute the install script:
 
@@ -131,6 +131,9 @@ It is not necessary to have native coin daemons running. As you will see, managi
 
 Make sure to follow the above guide: :ref:`cli-manual-installation-guide`. We need to be able to start a marketmaker instance from the command line in order to start using Insomnia.
 
+Setting the passphrase
+^^^^^^^^^^^^^^^^^^^^^^
+
 The first call you need to do when you start a marketmaker instance, is to set the passphrase using the ``setpassphrase`` call. Normally, using a CLI, you go to ``~/SuperNET/iguana/dexscripts`` and execute the ``setpassphrase`` script stored there. Now, we are going to open that script and copy the contents to Insomnia.
 
 Go to the ``dexscripts`` folder:
@@ -191,6 +194,8 @@ This is what you should see in the output part of the screen, when you clicked S
 .. image:: _static/images/setpassphrase-after-send.png
    :align: center
 
+Orderbook
+^^^^^^^^^
 
 The next thing you probably want to see, is an orderbook for some pair, like KMD/BTC. Go to the ``dexscripts`` folder again, copy the complete curl command for ``orderbook`` and paste it in a new request. I called this new request ``orderbook KMD/BTC`` and the end result should look like this:
 
@@ -219,9 +224,48 @@ Now that both coins are enabled (a successful electrum request automatically ena
 .. image:: _static/images/orderbook-output.png
    :align: center
 
+For enabling coins when you have a native coin daemon running, the ``enable`` request is needed. Copy the following curl command in a new Insomnia request, called ``enable <coin>``. I use BTC in this example.
+
+.. code-block:: bash
+
+   curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"enable\",\"coin\":\"BTC\"}"
+
+.
+
+Buy
+^^^
 
 Environment variables
 ^^^^^^^^^^^^^^^^^^^^^
+
+Now that we made a couple of requests, suppose you want to change the passphrase, and consequently the userpass. You'll have to go through every request and change the ``userpass`` value. With 25 requests, this becomes a bit tedious. 
+
+Using environment variables, we can set a variable and use it in each request. This way, you only need to change a value once, and it will apply to all the requests.
+
+Click on No Environment and click Manage Environments (or press Ctrl-E):
+
+.. image:: _static/images/env-init.png
+   :align: center
+
+This leads you to the Base Environment, showing an empty JSON file. This JSON file will store all the global variables. Let's make a global ``myuserpass`` variable, containing your userpass.
+
+.. image:: _static/images/env-base-userpass.png
+   :align: center
+
+Click Done in the right bottom corner. Now, choose a request and remove the userpass value, but leave the 2 quotes, such that the following appears: ``"userpass": ""``. Start typing ``myuserpass`` in between the quotes, and wait for a dropdown to appear. When it appears, select the ``myuserpass`` value you see:
+
+.. image:: _static/images/env-dropdown.png
+   :align: center
+
+If done correctly, you'll see this purple box appear between the 2 quotes. Do this for all your requests, except the ``setpassphrase`` request, since that requires a default passphrase for initial start-up.
+
+.. image:: _static/images/env-orderbook-result.png
+   :align: center
+
+
+
+Folders
+^^^^^^^
 
 Filtering
 ^^^^^^^^^
@@ -238,6 +282,6 @@ Insomnia stores a list of all the calls you did in the past, including its outpu
 How to create a new BarterDEX trading network
 ---------------------------------------------
 
-Since BarterDEX is a peer-to-peer network, seeded by some ip-addresses to create the network, others can create a BarterDEX network of their own. This enables people to trade within a private group of traders, or to trade directly from person to person.
+Since BarterDEX is a decentralized, peer-to-peer network, seeded by some ip-addresses to create the network, others can create a BarterDEX network of their own. This enables people to trade within a private group of traders, or to trade directly from person to person.
 
-See :ref:`new-or-private-network` in the API docs on how to do this.
+See :ref:`new-or-private-network` in the API docs on how to do this. (there currently is no GUI to handle this process)
