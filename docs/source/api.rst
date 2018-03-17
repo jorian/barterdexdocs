@@ -304,5 +304,7 @@ Docker
 
 lukechilds has provided a `docker image for BarterDEX`_.
 
+
+
 .. _docker image for BarterDEX: https://github.com/lukechilds/docker-barterdex-api
 
