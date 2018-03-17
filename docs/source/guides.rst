@@ -75,19 +75,19 @@ This copies a bunch of scripts in the dexscripts folder, which is where we need 
 
 Before we can use any of these scripts, some security measures are needed to prevent bad actors from issuing API calls without your consent. The ``passphrase`` and ``userpass`` values take care of this security.
 
-Create the passphrase file:
+Create the passphrase file. Type the following and hit enter:
 
 .. code-block:: bash
 
     nano passphrase
     
-This file should contain the following line, with a strong passphrase between the <>:
+This file should contain the following line, with a strong passphrase between the "":
 
 .. code-block:: bash
 
     export passphrase="<strong userpass value here>"
 
-``Ctrl-x`` to exit, and press ``y`` to save the changes.
+``Ctrl-x`` to exit, press ``y`` and then ``enter`` to save the changes.
 
 The ``userpass`` value is derived from the ``passphrase`` value, and in order to obtain the ``userpass`` value, we need to start BarterDEX. Starting BarterDEX (or actually the ``marketmaker`` process) is done by executing the ``client`` script, which basically is an automated combination of retrieving the latest updates and building the marketmaker executable file: (it can take a while before anything shows up)
 
@@ -111,7 +111,7 @@ The response contains the ``userpass`` value. Copy this value and paste it in a 
     nano userpass
     export userpass="<paste userpass value here>"
 
-``Ctrl-x`` to exit, ``y`` to save changes.
+``Ctrl-x`` to exit, ``y`` and ``enter`` to save changes.
 
 Everything is now good to go. From here on, you can issue any script that is in the dexscripts folder, such as the ``orderbook`` script, that fetches all the orders from the specified pair, or the ``getcoin`` script that gets all the coin-specific information from the coin as defined inside that script. 
 
@@ -146,12 +146,13 @@ Go to the ``dexscripts`` folder:
 .. image:: _static/images/setpassphrase-init.png
    :align: center
 
-Copy the contents of only the curl command to your clipboard (Ctrl-Shift-c):
+You'll see that this script uses the passphrase as defined in the passphrase file, and that the curl command below it is the RPC issued to the marketmaker instance. It is only this curl command we need in Insomnia.
+
+Copy the following ``setpassphrase`` curl command to your clipboard (it is the same as the one in the dexscripts folder):
 
 .. code-block:: bash
     
-    curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"1d8b27b21efabcd96571cd56f91a40fb9aa4cc623d273c63bf9223dc6f8cd81f\",\"method\":\"passphrase\",\"passphrase\":\"$passphrase\",\"gui\":\"nogui\"}"
-
+    curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"ef7ca9d596f4d0b504011989c9261330d3ab6c0aa092e779ce6479f8c23cd413\",\"method\":\"passphrase\",\"passphrase\":\"$passphrase\",\"gui\":\"nogui\"}"
 
 Now, go to Insomnia, and create a New Request (Ctrl-N).
 
@@ -160,12 +161,12 @@ Now, go to Insomnia, and create a New Request (Ctrl-N).
 
 Name it ``setpassphrase`` and click Create.
 
-Now, paste the just copied curl command in the textfield area, right next to the the GET dropdown:
+Paste the just copied curl command in the textfield area, right next to the the GET dropdown:
 
 .. image:: _static/images/setpassphrase-copy-curl.png
    :align: center
 
-Insomnia recognises this curl command, and automatically extracts the ip-address and the data. Let's call that middle part of Insomnia the Input screen. It still looks a bit ugly, so let's make it look better.
+Insomnia recognises this curl command, and automatically extracts the ip-address and the data. Let's call that middle part of Insomnia the input screen. It still looks a bit ugly, so let's make it look better.
 
 Click on Other, and change Other to JSON. 
 
@@ -179,26 +180,24 @@ Next, Beautify this JSON:
 
 It should result in this:
 
-
 .. image:: _static/images/setpassphrase-after-beautify.png
    :align: center
 
-Looks better, right? This process of copying a curl command from the ``dexscripts`` folder, creating a new request and pasting the curl command in Insomnia is what you probably need to do for most of the commands, like ``orderbook``, ``buy`` and ``balances``.
+Looks better, right? This process of copying a curl command from the ``dexscripts`` folder, creating a new request and pasting the curl command in Insomnia is what you probably need to do for most of the commands, like ``orderbook``, ``buy`` and ``balances``. Actually, all calls as defined in the :ref:`API docs` can be copied into Insomnia.
 
-Now enter your passphrase in the area where the passphrase still is empty, between the 2 quotes. Start a marketmaker instance by running ``client`` from the dexscripts folder and let it boot. When it's done booting, click the Send button in Insomnia for the setpassphrase script.
+Now enter your passphrase in the area where the passphrase still is empty, between the 2 quotes. Start a marketmaker instance by running ``./client`` from the `dexscripts` folder and let it boot. When it's done booting, click the Send button in Insomnia for the setpassphrase request.
 
-(if the output on the right side complains that the userpass has not been set, make sure to set the userpass value with ``ef7ca9d596f4d0b504011989c9261330d3ab6c0aa092e779ce6479f8c23cd413``).
+(if the output on the right side of Insomnia complains that the userpass has not been set, make sure to set the userpass value in the JSON data with ``ef7ca9d596f4d0b504011989c9261330d3ab6c0aa092e779ce6479f8c23cd413``).
 
 This is what you should see in the output part of the screen, when you clicked Send:
 
 .. image:: _static/images/setpassphrase-after-send.png
    :align: center
 
-Orderbook
-^^^^^^^^^
+Fetch the orderbook
+^^^^^^^^^^^^^^^^^^^
 
 The next thing you probably want to see, is an orderbook for some pair, like KMD/BTC. Go to the ``dexscripts`` folder again, copy the complete curl command for ``orderbook`` and paste it in a new request. I called this new request ``orderbook KMD/BTC`` and the end result should look like this:
-
 
 .. image:: _static/images/orderbook-initial.png
    :align: center
@@ -230,10 +229,9 @@ For enabling coins when you have a native coin daemon running, the ``enable`` re
 
    curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"enable\",\"coin\":\"BTC\"}"
 
-.
+This enables BTC to be used in marketmaker for the current session. If you stop marketmaker and start it again, you need to enable BTC again before it can be used in marketmaker. 
 
-Buy
-^^^
+To avoid having to enable coins everytime you start marketmaker, you need to edit the coins file: :ref:`How to edit the coins file`.
 
 Environment variables
 ^^^^^^^^^^^^^^^^^^^^^
@@ -262,6 +260,74 @@ If done correctly, you'll see this purple box appear between the 2 quotes. Do th
 .. image:: _static/images/env-orderbook-result.png
    :align: center
 
+Buy request
+^^^^^^^^^^^
+
+Now that we have successfully fetched an orderbook for the KMD/BTC pair, let's try and buy something.
+
+Copy the following ``buy`` curl and paste it in a new Insomnia request:
+
+.. code-block:: bash
+
+   curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"{{myuserpass}}\",\"method\":\"buy\",\"base\":\"KMD\",\"rel\":\"BTC\",\"relvolume\":0.005,\"price\":0.0005}"
+
+.. image:: _static/images/buy-copy-curl.png
+   :align: center
+
+Buying a coin always happens in pairs: KMD/BTC means that KMD is the base coin and BTC is the rel coin. You always buy base with rel, so in this case, you buy KMD with BTC. This means that you need some BTC in your BTC smart address, to be able to buy KMD with it, and you need to have at least 2 BTC transactions in this smart address, because you are paying a small `dexfee` too. 
+
+You can find this BTC smart address by selecting the ``setpassphrase`` request and finding the ``"BTC": "<address here>"`` line.
+
+``rel`` and ``relvolume`` are related. The amount of KMD you can buy, depends on the ``relvolume`` you define. A glance at the orderbook will give you an idea about how to define ``relvolume``. Also, the amount of KMD you receive is a combination of ``relvolume`` and ``price``. It is a result of a trade, rather than a goal. It is not simply saying: "I want 10 KMD, figure out how much BTC I need to pay". Instead, it is the other way around: "Here is 1 BTC, figure out how much KMD I get".
+
+Take for example this order in the orderbook for KMD/BTC:
+
+.. image:: _static/images/buy-orderbook-ex.png
+   :align: center
+
+There are three things in this ask that you need to pay attention to:
+
+- avevolume
+- maxvolume
+- depth
+
+``avevolume`` means the average volume of KMD this seller has to offer, expressed in BTC. This is useful, because you need to define the ``relvolume`` in your buy request as BTC. 
+``maxvolume`` means that the amount defined here is the largest KMD utxo of this seller. 
+``depth`` is a phrase commonly used by traders. Here it defines the sum of all KMD utxos from all sellers of KMD, cumulatively.
+
+If you successfully want to buy this order, you need to adapt the ``relvolume`` in your buy request to the volume specified in this order. For this order, it would need to be lower than 0.00498998 BTC. It also depends on the utxo set of the seller, because a seller needs to be able to do a deposit and the actual payment. A deposit is about 13% larger than the actual payment, which means that the seller has to have 2 utxos of about the same size, in order to sell something of that size. To read more about this, read the :ref:`Overview of the atomic swap protocol`.
+
+It is also important to state a ``price`` in your buy request. The price you define here is the maximum price you want to pay for your KMD. Since the order has set a price of 0.00036349, your max price needs to be a little above it.
+
+Now that we know all the information for submitting a ``buy`` request, we can create it. The following should, if the seller has enough utxos, yield you some KMD:
+
+.. code-block:: json
+
+   {
+      "userpass": "{{myuserpass}}",
+      "method": "buy",
+      "base": "KMD",
+      "rel": "BTC",
+      "relvolume": 0.001,
+      "price": 0.00037000
+   }
+
+.. note::
+
+   Because of network propagation times and the use of cached data, the data shown in the orderbook is not always 100% correct or up-to-date.
+
+Contrary to centralised exchanges like Binance or Bittrex, clicking Send for this ``buy`` request in Insomnia does not fulfill this order automatically. Instead, what marketmaker does is sending a ``buy request`` onto the decentralised network, to all the other marketmaker nodes your node is connected to. Each node will see this request, and if there is a node that has a price set for this KMD/BTC pair, it will evaluate your request and if it fulfills all requirements, it will reply with a message containing a counteroffer. This counteroffer is always better than the ``buy request`` you initially sent, because it falls within the boundaries you set in your ``buy request``.
+
+Your ``buy request`` can have multiple nodes on the marketmaker network respond with a better price. Your node then picks the best (lowest) price and starts the trade. 
+
+However! Defining a buy request that fulfills an order from the orderbook will not guarantee you of a successful trade. Network issues could stop a trade, as well as out-of-date data from the seller. The orderbook may be stating that a seller has utxos, but in reality someone else could have bought the order already.
+
+// hidden sellers
+
+The seller of KMD wants 0.00036349 BTC for 1 KMD, in other words: the price. 
+
+
+
 
 
 Folders
@@ -278,6 +344,26 @@ History
 
 Insomnia stores a list of all the calls you did in the past, including its output. This is useful for debugging and retrieving information you might need at a later stage. 
 
+How to edit the coins file
+--------------------------
+
+The coins file contains all the currently supported coins in BarterDEX. It is loaded into marketmaker each time you start it. The file can be edited to your likings, mainly to enable coins on marketmaker startup automatically, without having to enable coins one by one.
+
+Open the coins file with nano:
+
+.. code-block:: bash
+
+   cd ~/SuperNET/iguana/dexscripts
+   nano coins
+
+This will show you a list of all coins. Suppose you want to enable ZEC everytime you start marketmaker. You need to add the argument ``\"active\":1,`` to that JSON object, such that it results like this:
+
+.. image:: _static/images/edit-coins-zec.png
+   :align: center
+
+To find a coin in this long list of supported coins, type Ctrl-W to search. 
+
+You can make as many coins active as you like. If the native daemon of an active coin is not running, marketmaker will ignore the coin and leave the coin disabled. 
 
 How to create a new BarterDEX trading network
 ---------------------------------------------
