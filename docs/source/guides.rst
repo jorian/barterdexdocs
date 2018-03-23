@@ -208,28 +208,27 @@ You also need to copy the userpass from the ``setpassphrase`` call we did before
 .. image:: _static/images/orderbook-update-data.png
    :align: center
 
-Try Sending this request. It will complain that at least one of the coins is disabled, so we need to enable them. KMD is enabled by default, which means that if you have a native KMD daemon running, you don't have to explicitly enable KMD. If you don't have a KMD daemon, or a BTC daemon, you need to use a Electrum SPV for that. Let's first enable both coins using Electrum.
+Try Sending this request. It will complain that at least one of the coins is disabled, so we need to enable them. A coin must be explicitly enabled before trades can happen. By default, all coins except KMD and BTC are disabled at startup, which means that if you have a native KMD or BTC daemon running, you don't have to explicitly enable KMD or BTC. If you don't have a KMD daemon, or a BTC daemon, you need to use a Electrum SPV for that. Let's first enable both coins using Electrum.
 
-Go to http://pad.supernet.org/electrum-servers where you'll find a long list of all coins that support Electrum. Find BTC, copy the curl command and paste it in Insomnia, like you did with the other requests. Do the same for KMD in a new request, such that you end up with 2 requests: electrum BTC and electrum KMD:
+Go to http://pad.supernet.org/electrum-servers where you'll find a long list of all coins that support Electrum (https://github.com/jl777/coins will contain all electrum servers in the future). Find BTC, copy the curl command and paste it in Insomnia, like you did with the other requests. Do the same for KMD in a new request, such that you end up with 2 requests: electrum BTC and electrum KMD:
 
 .. image:: _static/images/electrum-kmd-btc.png
    :align: center
 
-Click Send for both requests, and if all is right, you'll see a success message in the output screen.
+Click Send for both requests, and if all is right, you'll see a success message for both requests in the output screen.
 
 Now that both coins are enabled (a successful electrum request automatically enables the coin), we can go to the orderbook request and see if something happens. If all is right, you'll see something like this:
-
 
 .. image:: _static/images/orderbook-output.png
    :align: center
 
-For enabling coins when you have a native coin daemon running, the ``enable`` request is needed. Copy the following curl command in a new Insomnia request, called ``enable <coin>``. I use BTC in this example.
+For enabling coins when you have a native coin daemon running, the ``enable`` request is needed. Copy the following curl command in a new Insomnia request, called ``enable <coin>``. I use ZEC in this example.
 
 .. code-block:: bash
 
-   curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"enable\",\"coin\":\"BTC\"}"
+   curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"enable\",\"coin\":\"ZEC\"}"
 
-This enables BTC to be used in marketmaker for the current session. If you stop marketmaker and start it again, you need to enable BTC again before it can be used in marketmaker. 
+This enables ZEC to be used in marketmaker for the current session. If you stop marketmaker and start it again, you need to enable ZEC again before it can be used in marketmaker. This goes for every other coin, except KMD and BTC.
 
 To avoid having to enable coins everytime you start marketmaker, you need to edit the coins file: :ref:`How to edit the coins file`.
 
@@ -263,7 +262,7 @@ If done correctly, you'll see this purple box appear between the 2 quotes. Do th
 Buy request
 ^^^^^^^^^^^
 
-Now that we have successfully fetched an orderbook for the KMD/BTC pair, let's try and buy something.
+We have successfully fetched an orderbook for the KMD/BTC pair. Let's try to buy something.
 
 Copy the following ``buy`` curl and paste it in a new Insomnia request:
 
@@ -274,11 +273,13 @@ Copy the following ``buy`` curl and paste it in a new Insomnia request:
 .. image:: _static/images/buy-copy-curl.png
    :align: center
 
-Buying a coin always happens in pairs: KMD/BTC means that KMD is the base coin and BTC is the rel coin. You always buy base with rel, so in this case, you buy KMD with BTC. This means that you need some BTC in your BTC smart address, to be able to buy KMD with it, and you need to have at least 2 BTC transactions in this smart address, because you are paying a small `dexfee` too. 
+Buying a coin with another coin always happens in pairs: KMD/BTC means that KMD is the base coin and BTC is the rel coin: base/rel. You always buy base with rel, so in this case, you buy KMD with BTC. This means that you need some BTC in your BTC smart address, to be able to buy KMD with it, and you need to have at least 2 BTC transactions in this smart address, because you are paying a small `dexfee` too. 
 
-You can find this BTC smart address by selecting the ``setpassphrase`` request and finding the ``"BTC": "<address here>"`` line.
+(For reasons why 2 transactions (UTXOs) are needed, read the :ref:`Overview of the atomic swap protocol`.)
 
-``rel`` and ``relvolume`` are related. The amount of KMD you can buy, depends on the ``relvolume`` you define. A glance at the orderbook will give you an idea about how to define ``relvolume``. Also, the amount of KMD you receive is a combination of ``relvolume`` and ``price``. It is a result of a trade, rather than a goal. It is not simply saying: "I want 10 KMD, figure out how much BTC I need to pay". Instead, it is the other way around: "Here is 1 BTC, figure out how much KMD I get".
+You can get this BTC smart address by selecting the ``setpassphrase`` request and finding the ``"BTC": "<address here>"`` line.
+
+``rel`` and ``relvolume`` are related. The amount of KMD you can buy, depends on the ``relvolume`` you define. A glance at the orderbook will give you an idea about what size ``relvolume`` should be. Also, the amount of KMD you receive is a combination of ``relvolume`` and ``price``. It is a result of a trade, rather than a goal. It is not simply saying: "I want 10 KMD, figure out how much BTC I need to pay". Instead, it is the other way around: "Here is 1 BTC, figure out how much KMD I get".
 
 Take for example this order in the orderbook for KMD/BTC:
 
@@ -287,19 +288,15 @@ Take for example this order in the orderbook for KMD/BTC:
 
 There are three things in this ask that you need to pay attention to:
 
-- avevolume
-- maxvolume
-- depth
-
-``avevolume`` means the average volume of KMD this seller has to offer, expressed in BTC. This is useful, because you need to define the ``relvolume`` in your buy request as BTC. 
-``maxvolume`` means that the amount defined here is the largest KMD utxo of this seller. 
-``depth`` is a phrase commonly used by traders. Here it defines the sum of all KMD utxos from all sellers of KMD, cumulatively.
+- ``avevolume`` means the average volume of KMD this seller has to offer, expressed in BTC. This is useful, because you need to define the ``relvolume`` in your buy request as BTC. 
+- ``maxvolume`` means that the amount defined here is the largest KMD utxo of this seller.
+-  ``depth`` is a phrase commonly used by traders. Here it defines the sum of all KMD utxos from all sellers of KMD, cumulatively.
 
 If you successfully want to buy this order, you need to adapt the ``relvolume`` in your buy request to the volume specified in this order. For this order, it would need to be lower than 0.00498998 BTC. It also depends on the utxo set of the seller, because a seller needs to be able to do a deposit and the actual payment. A deposit is about 13% larger than the actual payment, which means that the seller has to have 2 utxos of about the same size, in order to sell something of that size. To read more about this, read the :ref:`Overview of the atomic swap protocol`.
 
-It is also important to state a ``price`` in your buy request. The price you define here is the maximum price you want to pay for your KMD. Since the order has set a price of 0.00036349, your max price needs to be a little above it.
+It is also important to state a ``price`` in your buy request. The price you define here is the maximum price you want to pay for your KMD. Since the order has set a price of 0.00036349, your max price needs to be a little above it, for your request to find willing counterparties to respond.
 
-Now that we know all the information for submitting a ``buy`` request, we can create it. The following should, if the seller has enough utxos, yield you some KMD:
+Now that we know all the information for submitting a ``buy`` request, we can create it. The following should, if the seller has enough utxos and if the atomic swap completes successfully, yield you some KMD (based on the data shown above):
 
 .. code-block:: json
 
@@ -314,17 +311,16 @@ Now that we know all the information for submitting a ``buy`` request, we can cr
 
 .. note::
 
-   Because of network propagation times and the use of cached data, the data shown in the orderbook is not always 100% correct or up-to-date.
+   Because of network propagation times and the use of cached data, the data shown in the orderbook is not always 100% up-to-date.
 
-Contrary to centralised exchanges like Binance or Bittrex, clicking Send for this ``buy`` request in Insomnia does not fulfill this order automatically. Instead, what marketmaker does is sending a ``buy request`` onto the decentralised network, to all the other marketmaker nodes your node is connected to. Each node will see this request, and if there is a node that has a price set for this KMD/BTC pair, it will evaluate your request and if it fulfills all requirements, it will reply with a message containing a counteroffer. This counteroffer is always better than the ``buy request`` you initially sent, because it falls within the boundaries you set in your ``buy request``.
+Contrary to centralised exchanges like Binance or Bittrex, submitting the ``buy`` request to the BarterDEX network by  clicking `Send` in Insomnia does not fulfill this order automatically. Instead, what marketmaker does is sending a ``buy request`` onto the decentralised network, to all the other marketmaker nodes your node is connected to. Each node will see this request, and if there is a node that has a price set for this KMD/BTC pair, it will evaluate your request and if it fulfills all requirements (such as price and correct relvolume), it will reply with a message containing a counteroffer. This counteroffer is always better than the ``buy request`` you initially sent, because it falls within the boundaries you set in your ``buy request``.
 
-Your ``buy request`` can have multiple nodes on the marketmaker network respond with a better price. Your node then picks the best (lowest) price and starts the trade. 
+Your ``buy request`` can have multiple nodes on the marketmaker network respond to it. This all depends on the boundaries you set and the number of marketmaker nodes in the network. Your node then picks the best (lowest) price and starts the trade. 
 
-However! Defining a buy request that fulfills an order from the orderbook will not guarantee you of a successful trade. Network issues could stop a trade, as well as out-of-date data from the seller. The orderbook may be stating that a seller has utxos, but in reality someone else could have bought the order already.
+However! Defining a buy request that fulfills an order from the orderbook will not guarantee you a successful trade. Network issues could stop a trade, as well as out-of-date data from the seller. The orderbook may be stating that a seller has utxos, but in reality someone else could have bought the order already.
 
-// hidden sellers
-
-The seller of KMD wants 0.00036349 BTC for 1 KMD, in other words: the price. 
+// TODO: hidden sellers (orders that exist but are not shown in orderbook)
+// TODO: switch pairs, switch price
 
 
 
