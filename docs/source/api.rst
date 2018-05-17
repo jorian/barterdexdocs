@@ -120,7 +120,7 @@ When initiating a new network, apart from defining the ``netid``, the ``seednode
 
 This basically means that an almost infinite number of BarterDEX networks can be created, using the ``netid`` and ``seednode`` startup arguments for ``marketmaker``.
 
-.. _default seednodes: https://github.com/jl777/SuperNET/blob/dev/iguana/exchanges/LP_nativeDEX.c#L141 
+.. _default seednodes: https://github.com/jl777/SuperNET/blob/dev/iguana/exchanges/LP_nativeDEX.c#L146 
 
 General commands
 ----------------
