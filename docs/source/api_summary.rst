@@ -14,6 +14,18 @@ barterDEX Operation
 :ref:`help`, :ref:`jpg`, :ref:`millis`, :ref:`notarizations`, :ref:`parselog`, :ref:`run`, 
 :ref:`setpassphrase`, :ref:`sleep`, :ref:`stop`, :ref:`trust`, :ref:`trusted`
 
+barterDEX Trading
+^^^^^^^^^^^^^^^^^
+
+:ref:`autoprice`, :ref:`buy`, :ref:`getfee`, :ref:`getprices`, 
+:ref:`goal`,:ref:`goals`, :ref:`myprice`,:ref:`myprices`, 
+:ref:`orderbook`, :ref:`pubkeystats`, :ref:`sell`, 
+:ref:`setconfirms`, :ref:`setprice`, :ref:`fomo`, :ref:`dump`
+
+> :ref:`autoprice-the-value-of-a-fund-using-the-fundvalue-api`
+
+> :ref:`autoprice-using-usdpeg`
+
 BarterDEX Operation
 -------------------
 
