@@ -51,7 +51,7 @@ master_doc = 'index'
 # General information about the project.
 project = 'BarterDEX'
 #copyright = '2018, Jorian'
-author = 'Jorian\\\n, gcharang'
+author = 'Jorian\\ , gcharang\\ , Contributors from Komodo'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -144,7 +144,7 @@ latex_elements = {
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
-
+	 'sphinxsetup': 'parsedliteralwraps=true, verbatimwrapslines=true, ',
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
@@ -155,7 +155,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'BarterDEX.tex', 'BarterDEX Documentation',
-     'Jorian\\\n, gcharang', 'manual'),
+     'Jorian\\ , gcharang\\ , Contributors from Komodo', 'manual'),
 ]
 
 
@@ -176,7 +176,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'BarterDEX', 'BarterDEX Documentation',
-     author, 'BarterDEX', 'One line description of project.',
+     author, 'BarterDEX', 'Peer-to-Peer Decentralised Exchange.',
      'Miscellaneous'),
 ]
 
