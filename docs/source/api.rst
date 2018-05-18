@@ -1,7 +1,7 @@
 API docs
 ========
 
-WORK IN PROGRESS! This will list all API commands available in BarterDEX. WORK IN PROGRESS!
+WORK IN PROGRESS! For a list of all API commands available in BarterDEX, refer to :ref:`API Summary by Category`. WORK IN PROGRESS!
 
 Introduction
 ------------

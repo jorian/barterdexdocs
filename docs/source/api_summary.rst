@@ -1571,14 +1571,15 @@ Sample Output:
 	]
 
 barterDEX Trading
-^^^^^^^^^^^^^^^^^
+-----------------
 
 Default timeout for a trade is 10 seconds, which means if no response, must wait 10 seconds between trade requests. It will generate an error if Alice tries to submit a trade while a previous request is pending.
 
 However if the other side responds, you can do another trade and we are seeing virtually instant responses from the live LP nodes.
 
 Trade Negotiation Sequence:
-"""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 ::
 
 	Alice submits a "request" to the Bob node.
