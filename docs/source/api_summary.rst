@@ -1419,116 +1419,175 @@ Sample Output:
    :align: center
                       
 notarizations
-This script will display coin notarization status for a specified coin. Use the script like this ./notarizations KMD, ./notarizations REVS, etc.
+^^^^^^^^^^^^^
+
+This script will display coin notarization status for a specified coin. Use the script like this ``./notarizations KMD``, ``./notarizations REVS``, etc.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"notarizations\",\"coin\":\"$1\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"notarizations\",\"coin\":\"$1\"}"
+
 Sample Output:
 
-{
-  "result": "success",
-  "coin": "KMD",
-  "lastnotarization": 553573,
-  "bestheight": 553578
-}
+.. code-block:: json
+
+    {
+        "result": "success",
+        "coin": "KMD",
+        "lastnotarization": 553573,
+        "bestheight": 553578
+    }
+
 parselog
-./parselog will parse the stats.log file, just the incremental since last time.
+^^^^^^^^
+
+``./parselog`` will parse the stats.log file, just the incremental since last time.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"parselog\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"parselog\"}"
+
 Sample Output:
 
-{
-  "result": "success",
-  "newlines": 0,
-  "request": 0,
-  "reserved": 0,
-  "connect": 0,
-  "connected": 0,
-  "duplicates": 0,
-  "parse_errors": 0,
-  "uniques": 0,
-  "tradestatus": 0,
-  "unknown": 0
-}
+.. code-block:: json
+
+	{
+		"result": "success",
+   	    "newlines": 0,
+   	    "request": 0,
+   	    "reserved": 0,
+   	    "connect": 0,
+   	    "connected": 0,
+   	    "duplicates": 0,
+   	    "parse_errors": 0,
+   	    "uniques": 0,
+   	    "tradestatus": 0,
+   	    "unknown": 0
+    }
+
 run
-./run starts barterDEX in LP (Liquid Provider) mode while ./client is for client mode. After it starts (takes a tiny bit time to complete) execute your API calls from the dexscripts directory. Don't use this API unless you have reliable internet connection from datacenter or vps.
+^^^
+
+``./run`` starts barterDEX in LP (Liquid Provider) mode while ``./client`` is for client mode. After it starts (takes a tiny bit time to complete) execute your API calls from the ``dexscripts`` directory. Don't use this API unless you have reliable internet connection from datacenter or vps.
 
 Sample File Contents:
 
-#!/bin/bash
-source passphrase
-source coins
-./stop
-git pull;
-cd ..; 
-./m_mm;
-pkill -15 marketmaker; 
-stdbuf -oL $1 ./marketmaker "{\"gui\":\"nogui\", \"profitmargin\":0.01, \"userhome\":\"/${HOME#"/"}\", \"passphrase\":\"$passphrase\", \"coins\":$coins}" &
+.. code-block:: shell
+
+	#!/bin/bash
+	source passphrase
+	source coins
+	./stop
+	git pull;
+	cd ..; 
+	./m_mm;
+	pkill -15 marketmaker; 
+	stdbuf -oL $1 ./marketmaker "{\"gui\":\"nogui\", \"profitmargin\":0.01, \"userhome\":\"/${HOME#"/"}\", \"passphrase\":\"$passphrase\", \"coins\":$coins}" &
+
 setpassphrase
+^^^^^^^^^^^^^
+
 This method helps the GUI build to take input of the passphrase and generate userpass. This is the second API to run in BarterDEX. On the first call it will display the userpass value at the top of output.
 
 Sample File Content:
 
-#!/bin/bash
-source userpass
-source passphrase
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"1d8b27b21efabcd96571cd56f91a40fb9aa4cc623d273c63bf9223dc6f8cd81f\",\"method\":\"passphrase\",\"passphrase\":\"$passphrase\",\"gui\":\"nogui\"}"
+.. code-block:: shell
+
+	#!/bin/bash
+	source userpass
+	source passphrase
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":	\"1d8b27b21efabcd96571cd56f91a40fb9aa4cc623d273c63bf9223dc6f8cd81f\",\"method\":\"passphrase\",\"passphrase\":\"$passphrase\",\"gui\":\"nogui\"}"
+
 sleep
-sleep API is to create a call with definite duration. What the below example scritps does is, it starts sleep async and it gets queued. While that is happening, we do 2 orderbooks, which immediately return. After 10 seconds the sleep is done and the normal command queue completes and the getcoin is executed. This changes the serialized nature of calls. So, it might destabilize things, but by being limited to orderbook and portfolio the risk is very small. New API can be added to the whitelisted fast calls, by testing it with a "fast":1.
+^^^^^
+
+``sleep`` API is to create a call with definite duration. What the below example scritps does is, it starts sleep async and it gets queued. While that is happening, we do 2 orderbooks, which immediately return. After 10 seconds the sleep is done and the normal command queue completes and the getcoin is executed. This changes the serialized nature of calls. So, it might destabilize things, but by being limited to orderbook and portfolio the risk is very small. New API can be added to the whitelisted fast calls, by testing it with a ``"fast":1``.
 
 Sample file content:
 
-curl --url "http://127.0.0.1:7783" --data "{\"queueid\":1,\"userpass\":\"$userpass\",\"method\":\"sleep\",\"seconds\":10}" &
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"REVS\",\"rel\":\"KMD\"}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"REVS\",\"rel\":\"KMD\"}"
-curl --url "http://127.0.0.1:7783" --data "{\"queueid\":2,\"userpass\":\"$userpass\",\"method\":\"getcoin\",\"coin\":\"REVS\",\"rel\":\"KMD\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"queueid\":1,\"userpass\":\"$userpass\",\"method\":\"sleep\",\"seconds\":10}" &
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"REVS\",\"rel\":\"KMD\"}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"REVS\",\"rel\":\"KMD\"}"
+	curl --url "http://127.0.0.1:7783" --data "{\"queueid\":2,\"userpass\":\"$userpass\",\"method\":\"getcoin\",\"coin\":\"REVS\",\"rel\":\"KMD\"}"
+
 stop
-This method will stop barterDEX.
+^^^^
+
+This method will stop ``barterDEX``.
 
 Sample File Content:
 
-#!/bin/bash
-source userpass
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"stop\"}"
+.. code-block:: shell
+
+	#!/bin/bash
+	source userpass
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"stop\"}"
+
 trust
-Make your pubkey trusted by using this ./trust method. You need to add your pubkey after the command. If you want the pubkey to be not trusted use \"trust\":-1. -1 means dont trust, 1 means to trust. This API works immediately.
+^^^^^
+
+Make your pubkey trusted by using this ``./trust`` method. You need to add your pubkey after the command. If you want the pubkey to be not trusted use \"trust\":-1. -1 means dont trust, 1 means to trust. This API works immediately.
 
 Sample File Contents:
 
-echo "usage: ./trust <pubkey>"
-source userpass
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"pubkey\":\"$1\",\"method\":\"trust\",\"trust\":1}"
+.. code-block:: shell
+
+	echo "usage: ./trust <pubkey>"
+	source userpass
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"pubkey\":\"$1\",\"method\":\"trust\",\"trust\":1}"
+
 Sample Output:
 
-usage: ./trust <pubkey>
-{"result":"success"}
+.. code-block:: shell
+
+	usage: ./trust <pubkey>
+	{"result":"success"}
+
 trusted
-This method will display the pubkey you made trusted. No need to edit the file.
+^^^^^^^
+
+This method will display the ``pubkey`` you made trusted. No need to edit the file.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"trusted\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"trusted\"}"
+
 Sample Output:
 
-[
-  "040f1d2d5d12027afa2cec30477312e225b0d24c77cc4aa08d3fffe51277b904"
-]
+.. code-block:: shell
+
+	[
+  		"040f1d2d5d12027afa2cec30477312e225b0d24c77cc4aa08d3fffe51277b904"
+	]
+
 barterDEX Trading
+^^^^^^^^^^^^^^^^^
+
 Default timeout for a trade is 10 seconds, which means if no response, must wait 10 seconds between trade requests. It will generate an error if Alice tries to submit a trade while a previous request is pending.
 
 However if the other side responds, you can do another trade and we are seeing virtually instant responses from the live LP nodes.
 
 Trade Negotiation Sequence:
+"""""""""""""""""""""""""""
+::
 
-Alice submits a "request" to the Bob node.
-Now we are in a pending state for up to 10 seconds.
-Bob responds with a "reserved", which releases Alice from the pending state.
-For the request that comes back, Alice can reject it or accept it and send a "connect" message.
-Finally Bob returns a "connected" message and the atomic swap begins.
-James has also added automated broadcast of any setprices, which will occur automatically when you do a buy/sell for the coin you are buying with, as long as you are not using Electrum.To be a bob, you need the native coin. With the pruning of the orderbook to most recent 2 minutes, it required the setprice to be called regularly. This function is internalized, so a single setprice is all that is needed. If you want to "cancel" it you can setprice to 0. GUI can now post bob orders if you have native coins enabled.
+	Alice submits a "request" to the Bob node.
+	Now we are in a pending state for up to 10 seconds.
+	Bob responds with a "reserved", which releases Alice from the pending state.
+	For the request that comes back, Alice can reject it or accept it and send a "connect" message.
+	Finally Bob returns a "connected" message and the atomic swap begins.
+	
+James has also added automated broadcast of any setprices, which will occur automatically when you do a buy/sell for the coin you are buying with, as long as you are not using Electrum.
+	To be a bob, you need the native coin. With the pruning of the orderbook to most recent 2 minutes, it required the setprice to be called regularly. 
+	This function is internalized, so a single setprice is all that is needed. If you want to "cancel" it you can setprice to 0. GUI can now post bob orders if you have native coins enabled.
 
 Using the buy/sell api is a fill or kill (except partial fills are allowed) and to put a limit order, autoprice needs to be used. The autoprice is a bit tricky to use, make sure you don't make the example backwards.
 
