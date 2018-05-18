@@ -1753,329 +1753,389 @@ Call 'recentswaps' to check the status of the trade request. Alice side does not
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"buy\",\"base\":\"MNZ\",\"rel\":\"KMD\",\"relvolume\":0.005,\"price\":0.172}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"buy\",\"base\":\"MNZ\",\"rel\":\"KMD\",\"relvolume\":0.005,\"price\":0.172}"
+
 Knowledge Base:
-base: the currency you want to buy rel: the currency you are paying with price: the max price you are willing to pay for 1 base relvolume: the amount of rel you want to trade timeout: the amount of time Alice or Bob should wait for payment. Default: 10 seconds (might be deprecated in future) duration: after the specified duration it wont be displayed
+"""""""""""""""
+
+``base:`` the currency you want to buy ``rel:`` the currency you are paying with ``price:`` the max price you are willing to pay for 1 base ``relvolume:`` the amount of rel you want to trade ``timeout:`` the amount of time Alice or Bob should wait for payment. Default: 10 seconds (might be deprecated in future) ``duration:`` after the specified duration it wont be displayed
 
 Sample Output:
 
-{
-  "result": "success",
-  "swaps": [
-    [
-      45030989,
-      41860326
-    ],
-    [
-      264022270,
-      1424922977
-    ],
-    [
-      3882191272,
-      3366340834
-    ]
-  ],
-  "pending": {
-    "expiration": 1509564162,
-    "timeleft": 15,
-    "requestid": 0,
-    "quoteid": 0,
-    "bob": "MNZ",
-    "base": "MNZ",
-    "basevalue": 0.02803687,
-    "alice": "KMD",
-    "rel": "KMD",
-    "relvalue": 0.0048,
-    "aliceid": 7785695213943587000
-  }
-}
+.. code-block:: json
+
+    {
+        "result": "success",
+        "swaps": [
+            [
+                45030989,
+                41860326
+            ],
+            [
+                264022270,
+                1424922977
+            ],
+            [
+                3882191272,
+                3366340834
+            ]
+        ],
+        "pending": {
+            "expiration": 1509564162,
+            "timeleft": 15,
+            "requestid": 0,
+            "quoteid": 0,
+            "bob": "MNZ",
+            "base": "MNZ",
+            "basevalue": 0.02803687,
+            "alice": "KMD",
+            "rel": "KMD",
+            "relvalue": 0.0048,
+            "aliceid": 7785695213943587000
+        }
+    }
+
 electrum
+^^^^^^^^
+
 This method enables a coin by connecting to the specified electrumx server. For this method running a native node and blockchain download is not necessary. You need to edit the file with coin name and IP address and port for the coin. For a list of electrumx server check this link http://pad.supernet.org/electrum-servers
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"KMD\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10001}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"MNZ\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10002}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"REVS\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10003}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"JUMBLR\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10004}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"SUPERNET\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10005}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"DEX\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10006}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"BOTS\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10007}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"CRYPTO\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10008}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"HODL\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10009}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"KMD\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10001}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"MNZ\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10002}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"REVS\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10003}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"JUMBLR\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10004}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"SUPERNET\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10005}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"DEX\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10006}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"BOTS\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10007}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"CRYPTO\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10008}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"electrum\",\"coin\":\"HODL\",\"ipaddr\":\"electrum1.cipig.net\",\"port\":10009}"
+
 getfee
-getfee API will display network tx fee based on that time. This should only be required for BTC, all other coins are hardcoded.
+^^^^^^
+
+``getfee`` API will display network tx fee based on that time. This should only be required for BTC, all other coins are hardcoded.
 
 Sample file content:
 
-#!/bin/bash
-source userpass
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"getfee\",\"coin\":\"BTC\"}"
+.. code-block:: shell
+
+	#!/bin/bash
+	source userpass
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":	\"$userpass\",\"method\":\"getfee\",\"coin\":\"BTC\"}"
+
 Sample file output:
 
-{"result":"success","coin":"BTC","txfee":0.00020000}
+.. code-block:: json
+
+	{
+		"result":"success",
+		"coin":"BTC",
+		"txfee":0.00020000
+	}
+
 getprices
-The ./getprices API lists all currently available trading pairs and its current prices. You need to specify a base and rel coin if you need a specific pair price.
+^^^^^^^^^
+
+The ``./getprices`` API lists all currently available trading pairs and its current prices. You need to specify a ``base`` and ``rel`` coin if you need a specific pair price.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"getprices\",\"coin\":\"KMD\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"getprices\",\"coin\":\"KMD\"}"
+
 Sample Output:
 
-[
-  {
-    "pubkey": "040f1d2d5d12027afa2cec30477312e225b0d24c77cc4aa08d3fffe51277b904",
-    "rmd160": "8784673d815a20300412a9010b72e771963d45b6",
-    "pubsecp": "03829863f4ed7660fbf62b2f84b0e655f523a33f23a1f681107d2a2942987584b1",
-    "timestamp": 1508160175,
-    "asks": [
-      [
-        "BTC",
-        "KMD",
-        3304.53174512
-      ],
-      [
-        "KMD",
-        "BTC",
-        0.00030268
-      ],
-      [
-        "KMD",
-        "REVS",
-        0.78551134
-      ],
-      [
-        "KMD",
-        "JUMBLR",
-        0.10432527
-      ],
-      [
-        "KMD",
-        "HUSH",
-        1.17931676
-      ],
-      [
-        "REVS",
-        "KMD",
-        1.29051134
-      ],
-      [
-        "JUMBLR",
-        "KMD",
-        9.77904977
-      ],
-      [
-        "HUSH",
-        "KMD",
-        0.86507888
-      ]
-    ]
-  }
-]
+.. code-block:: json
+
+    [{
+        "pubkey": "040f1d2d5d12027afa2cec30477312e225b0d24c77cc4aa08d3fffe51277b904",
+        "rmd160": "8784673d815a20300412a9010b72e771963d45b6",
+        "pubsecp": "03829863f4ed7660fbf62b2f84b0e655f523a33f23a1f681107d2a2942987584b1",
+        "timestamp": 1508160175,
+        "asks": [
+            [
+                "BTC",
+                "KMD",
+                3304.53174512
+            ],
+            [
+                "KMD",
+                "BTC",
+                0.00030268
+            ],
+            [
+                "KMD",
+                "REVS",
+                0.78551134
+            ],
+            [
+                "KMD",
+                "JUMBLR",
+                0.10432527
+            ],
+            [
+                "KMD",
+                "HUSH",
+                1.17931676
+            ],
+            [
+                "REVS",
+                "KMD",
+                1.29051134
+            ],
+            [
+                "JUMBLR",
+                "KMD",
+                9.77904977
+            ],
+            [
+                "HUSH",
+                "KMD",
+                0.86507888
+            ]
+        ]
+    }]
+
 goal
-The ./goal command is basically the automatic trading tool of the API. When you execute this command, orders will be set until the goals are reached. The idea is that you set the goal for each coin and if you have more than the goal for a specific coin, it will allow sales of that coin. If you have less than the goal percentage, it will allow buys of that coin.
+^^^^
+
+The ``./goal`` command is basically the automatic trading tool of the API. When you execute this command, orders will be set until the goals are reached. The idea is that you set the goal for each coin and if you have more than the goal for a specific coin, it will allow sales of that coin. If you have less than the goal percentage, it will allow buys of that coin.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\",\"coin\":\"KMD\",\"val\":99}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\",\"coin\":\"BTC\",\"val\":10}"
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\",\"coin\":\"REVS\",\"val\":1}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\",\"coin\":\"KMD\",\"val\":99}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\",\"coin\":\"BTC\",\"val\":10}"
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\",\"coin\":\"REVS\",\"val\":1}"
+
 Sample Output:
 
-{
-  "result": "success",
-  "kmd_equiv": 29.03290329,
-  "buycoin": "KMD",
-  "buyforce": 125.75072424,
-  "sellcoin": "DGB",
-  "sellforce": -412.28377122,
-  "portfolio": [
+.. code-block:: json
+
     {
-      "coin": "BTC",
-      "address": "15XAhHK4ULofD6BTckrCWK6XSkCjscX7jj",
-      "amount": 0,
-      "price": 3315.35638637,
-      "kmd_equiv": 0,
-      "perc": 0,
-      "goal": 10,
-      "goalperc": 9.09090909,
-      "relvolume": 0,
-      "force": 82.6446281,
-      "balanceA": 0,
-      "valuesumA": 0,
-      "balanceB": 0,
-      "valuesumB": 0,
-      "balance": 0
-    },
-    {
-      "coin": "KMD",
-      "address": "RDoMmoCM5AcEH6Yf5vqKbqRjD1fLcQHuWb",
-      "amount": 22.87390295,
-      "price": 1,
-      "kmd_equiv": 22.87390295,
-      "perc": 78.78613696,
-      "goal": 99,
-      "goalperc": 90,
-      "relvolume": 0,
-      "force": 125.75072424,
-      "balanceA": 22.6448,
-      "valuesumA": 22.87390295,
-      "aliceutil": 98.99840901,
-      "balanceB": 22.6448,
-      "valuesumB": 22.87390295,
-      "balance": 22.87390295,
-      "bobutil": 98.99840901
-    },
-    {
-      "coin": "DGB",
-      "address": "D9fGEYFhmkhwk6N4MLqm45G8Ksw3E2AmTR",
-      "amount": 919,
-      "price": 0.00670185,
-      "kmd_equiv": 6.15900034,
-      "perc": 21.21386304,
-      "goal": 1,
-      "goalperc": 0.90909091,
-      "relvolume": 186.60085587,
-      "force": -412.28377122,
-      "balanceA": 479.499,
-      "valuesumA": 919,
-      "aliceutil": 52.17616975,
-      "balanceB": 479.499,
-      "valuesumB": 919,
-      "balance": 919,
-      "bobutil": 52.17616975
+        "result": "success",
+        "kmd_equiv": 29.03290329,
+        "buycoin": "KMD",
+        "buyforce": 125.75072424,
+        "sellcoin": "DGB",
+        "sellforce": -412.28377122,
+        "portfolio": [{
+                "coin": "BTC",
+                "address": "15XAhHK4ULofD6BTckrCWK6XSkCjscX7jj",
+                "amount": 0,
+                "price": 3315.35638637,
+                "kmd_equiv": 0,
+                "perc": 0,
+                "goal": 10,
+                "goalperc": 9.09090909,
+                "relvolume": 0,
+                "force": 82.6446281,
+                "balanceA": 0,
+                "valuesumA": 0,
+                "balanceB": 0,
+                "valuesumB": 0,
+                "balance": 0
+            },
+            {
+                "coin": "KMD",
+                "address": "RDoMmoCM5AcEH6Yf5vqKbqRjD1fLcQHuWb",
+                "amount": 22.87390295,
+                "price": 1,
+                "kmd_equiv": 22.87390295,
+                "perc": 78.78613696,
+                "goal": 99,
+                "goalperc": 90,
+                "relvolume": 0,
+                "force": 125.75072424,
+                "balanceA": 22.6448,
+                "valuesumA": 22.87390295,
+                "aliceutil": 98.99840901,
+                "balanceB": 22.6448,
+                "valuesumB": 22.87390295,
+                "balance": 22.87390295,
+                "bobutil": 98.99840901
+            },
+            {
+                "coin": "DGB",
+                "address": "D9fGEYFhmkhwk6N4MLqm45G8Ksw3E2AmTR",
+                "amount": 919,
+                "price": 0.00670185,
+                "kmd_equiv": 6.15900034,
+                "perc": 21.21386304,
+                "goal": 1,
+                "goalperc": 0.90909091,
+                "relvolume": 186.60085587,
+                "force": -412.28377122,
+                "balanceA": 479.499,
+                "valuesumA": 919,
+                "aliceutil": 52.17616975,
+                "balanceB": 479.499,
+                "valuesumB": 919,
+                "balance": 919,
+                "bobutil": 52.17616975
+            }
+        ]
     }
-  ]
-}
+
 goals
+^^^^^
+
 Displays the goal percentage for each coin and their status.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"goal\"}"
+
 Sample Output:
 
-{
-  "result": "success",
-  "kmd_equiv": 28.98048555,
-  "buycoin": "BTC",
-  "buyforce": 625,
-  "sellcoin": "KMD",
-  "sellforce": -2908.30091422,
-  "base": "BTC",
-  "rel": "KMD",
-  "relvolume": 12.33191136,
-  "portfolio": [
+.. code-block:: json
+
     {
-      "coin": "BTC",
-      "address": "15XAhHK4ULofD6BTckrCWK6XSkCjscX7jj",
-      "amount": 0,
-      "price": 3321.5219084,
-      "kmd_equiv": 0,
-      "perc": 0,
-      "goal": 25,
-      "goalperc": 25,
-      "relvolume": 0,
-      "force": 625,
-      "balanceA": 0,
-      "valuesumA": 0,
-      "balanceB": 0,
-      "valuesumB": 0,
-      "balance": 0
-    },
-    {
-      "coin": "KMD",
-      "address": "RDoMmoCM5AcEH6Yf5vqKbqRjD1fLcQHuWb",
-      "amount": 22.87391037,
-      "price": 1,
-      "kmd_equiv": 22.87391037,
-      "perc": 78.92866505,
-      "goal": 25,
-      "goalperc": 25,
-      "relvolume": 12.33559451,
-      "force": -2908.30091422,
-      "balanceA": 22.6448,
-      "valuesumA": 22.87391037,
-      "aliceutil": 98.9983769,
-      "balanceB": 22.6448,
-      "valuesumB": 22.87391037,
-      "balance": 22.87391037,
-      "bobutil": 98.9983769
-    },
-    {
-      "coin": "ZEC",
-      "address": "t1NPmhcjCSfbFojEMZBfKe8CShQPpkcn4W7",
-      "amount": 0,
-      "price": 135.89703925,
-      "kmd_equiv": 0,
-      "perc": 0,
-      "goal": 25,
-      "goalperc": 25,
-      "relvolume": 0,
-      "force": 625,
-      "balanceA": 0,
-      "valuesumA": 0,
-      "balanceB": 0,
-      "valuesumB": 0,
-      "balance": 0
-    },
-    {
-      "coin": "DGB",
-      "address": "D9fGEYFhmkhwk6N4MLqm45G8Ksw3E2AmTR",
-      "amount": 919,
-      "price": 0.0066448,
-      "kmd_equiv": 6.10657518,
-      "perc": 21.07133495,
-      "goal": 25,
-      "goalperc": 25,
-      "relvolume": 0,
-      "force": 15.43440909,
-      "balanceA": 479.499,
-      "valuesumA": 919,
-      "aliceutil": 52.17616975,
-      "balanceB": 479.499,
-      "valuesumB": 919,
-      "balance": 919,
-      "bobutil": 52.17616975
+        "result": "success",
+        "kmd_equiv": 28.98048555,
+        "buycoin": "BTC",
+        "buyforce": 625,
+        "sellcoin": "KMD",
+        "sellforce": -2908.30091422,
+        "base": "BTC",
+        "rel": "KMD",
+        "relvolume": 12.33191136,
+        "portfolio": [{
+                "coin": "BTC",
+                "address": "15XAhHK4ULofD6BTckrCWK6XSkCjscX7jj",
+                "amount": 0,
+                "price": 3321.5219084,
+                "kmd_equiv": 0,
+                "perc": 0,
+                "goal": 25,
+                "goalperc": 25,
+                "relvolume": 0,
+                "force": 625,
+                "balanceA": 0,
+                "valuesumA": 0,
+                "balanceB": 0,
+                "valuesumB": 0,
+                "balance": 0
+            },
+            {
+                "coin": "KMD",
+                "address": "RDoMmoCM5AcEH6Yf5vqKbqRjD1fLcQHuWb",
+                "amount": 22.87391037,
+                "price": 1,
+                "kmd_equiv": 22.87391037,
+                "perc": 78.92866505,
+                "goal": 25,
+                "goalperc": 25,
+                "relvolume": 12.33559451,
+                "force": -2908.30091422,
+                "balanceA": 22.6448,
+                "valuesumA": 22.87391037,
+                "aliceutil": 98.9983769,
+                "balanceB": 22.6448,
+                "valuesumB": 22.87391037,
+                "balance": 22.87391037,
+                "bobutil": 98.9983769
+            },
+            {
+                "coin": "ZEC",
+                "address": "t1NPmhcjCSfbFojEMZBfKe8CShQPpkcn4W7",
+                "amount": 0,
+                "price": 135.89703925,
+                "kmd_equiv": 0,
+                "perc": 0,
+                "goal": 25,
+                "goalperc": 25,
+                "relvolume": 0,
+                "force": 625,
+                "balanceA": 0,
+                "valuesumA": 0,
+                "balanceB": 0,
+                "valuesumB": 0,
+                "balance": 0
+            },
+            {
+                "coin": "DGB",
+                "address": "D9fGEYFhmkhwk6N4MLqm45G8Ksw3E2AmTR",
+                "amount": 919,
+                "price": 0.0066448,
+                "kmd_equiv": 6.10657518,
+                "perc": 21.07133495,
+                "goal": 25,
+                "goalperc": 25,
+                "relvolume": 0,
+                "force": 15.43440909,
+                "balanceA": 479.499,
+                "valuesumA": 919,
+                "aliceutil": 52.17616975,
+                "balanceB": 479.499,
+                "valuesumB": 919,
+                "balance": 919,
+                "bobutil": 52.17616975
+            }
+        ]
     }
-  ]
-}
+
 myprice
+^^^^^^^
+
 Shows number of bids andprices you set for a given coin. Your wallet must be active to display the prices.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"myprice\",\"base\":\"REVS\",\"rel\":\"KMD\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"myprice\",\"base\":\"REVS\",\"rel\":\"KMD\"}"
+
 Sample Output:
 
-{
-  "base": "REVS",
-  "rel": "KMD",
-  "bid": 2,
-  "ask": 0
-}
+.. code-block:: json
+
+	{
+	  "base": "REVS",
+	  "rel": "KMD",
+	  "bid": 2,
+	  "ask": 0
+	}
+
 myprices
-./myprices shows numer of bids and ask for your ./buy coin pair.
+^^^^^^^^
+
+``./myprices`` shows numer of bids and ask for your ``./buy`` coin pair.
 
 Sample File Contents:
 
-curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"myprices\"}"
+.. code-block:: shell
+
+	curl --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"myprices\"}"
+
 Sample Output:
 
-[
-  {
-    "base": "KMD",
-    "rel": "REVS",
-    "bid": 0,
-    "ask": 0.5
-  },
-  {
-    "base": "REVS",
-    "rel": "KMD",
-    "bid": 2,
-    "ask": 0
-  }
-]
+.. code-block:: json
+
+    [{
+            "base": "KMD",
+            "rel": "REVS",
+            "bid": 0,
+            "ask": 0.5
+        },
+        {
+            "base": "REVS",
+            "rel": "KMD",
+            "bid": 2,
+            "ask": 0
+        }
+    ]
+
 orderbook
 Displays bid/ask for a specific coin/asset pair. You can display multiple pairs, just need to edit the file and add more line. The numutxos/minvolume/maxvolume are the state of your local utxo cache. It might or might not be 100% accurate. Also, if all 0's it could be that it hasn't been queried yet. Even if all zeros, it is possible, even likely that there are actually utxo available.
 
