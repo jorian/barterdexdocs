@@ -56,13 +56,15 @@ To view the html as if it is hosted, `cd` into docs/build/html and do
 python -m SimpleHTTPServer
 ```
 --------------------------
+
 A quick intro/cheat-sheet for reST: http://docutils.sourceforge.net/docs/user/rst/quickref.html
 
 A bit more elaborate and also has sphinx specific syntax: https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html
 
 Another sphinx reference: http://rest-sphinx-memo.readthedocs.io/en/latest/Sphinx.html
 
-reST syntax Syntax Reminders: https://gist.github.com/ionelmc/e876b73e2001acd2140f
+reST Syntax Reminders: https://gist.github.com/ionelmc/e876b73e2001acd2140f
+
 ---------------------------
 
 .gitignore ignores the buld directory.
