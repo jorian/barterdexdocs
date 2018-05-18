@@ -67,5 +67,5 @@ reST Syntax Reminders: https://gist.github.com/ionelmc/e876b73e2001acd2140f
 
 ---------------------------
 
-.gitignore ignores the buld directory.
+.gitignore ignores the build directory.
 
