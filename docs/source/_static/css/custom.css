@@ -1,7 +1,12 @@
-.wy-side-nav-search {
+.wy-side-nav-search,.wy-nav-top {
 	background-color: #326464;
 }
 
-.h4 {
-	color: #55554a;
+
+.wy-nav-side {
+	background: #55554a;
+}
+
+.wy-nav-content {
+    max-width: 1200px !important;
 }

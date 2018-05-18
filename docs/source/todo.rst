@@ -37,6 +37,15 @@ Can I privately swap coins with another person?
 What is a Liquidity Provider (LP) node?
 ---------------------------------------
 
+What is a Full relay node(FRN)?
+-------------------------------
+
+Alice vs Bob?
+-------------
+
+Alice needs 2 utxos bob: 3 (ratios?) alice: active bob: passive
+alice will be matched with the bob that has the best offer given her volume and price requirements.  
+
 How do I cancel an order?
 -------------------------
 
