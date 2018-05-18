@@ -62,3 +62,8 @@ A bit more elaborate and also has sphinx specific syntax: https://thomas-cokelae
 
 Another sphinx reference: http://rest-sphinx-memo.readthedocs.io/en/latest/Sphinx.html
 
+reST syntax Syntax Reminders: https://gist.github.com/ionelmc/e876b73e2001acd2140f
+---------------------------
+
+.gitignore ignores the buld directory.
+
