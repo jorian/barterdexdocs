@@ -3,10 +3,11 @@
 }
 
 
-.wy-nav-side {
-	color: #191917;
-}
 
 .wy-nav-content {
     max-width: 1200px !important;
+}
+
+.h4 {
+	color: #191917;
 }
