@@ -1,12 +1,12 @@
 README!
 
-Documentation for https://barterdex.readthedocs.io
+Documentation for https://barterdexdocs.readthedocs.io
 
 PR's appreciated
 
 -----
 
-This documentation is being written using the Restructured Text(reST, .rst) format. To be hosted at http://barterdex.readthedocs.io/en/latest/ with the theme sphinx_rtd.
+This documentation is being written using the Restructured Text(reST, .rst) format. To be hosted at http://barterdexdocs.readthedocs.io/en/latest/ with the theme sphinx_rtd.
 
 -----
 

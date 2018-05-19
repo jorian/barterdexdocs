@@ -6,7 +6,7 @@ List of API by Category
 
 Click any of the api options below to be taken to their summary.
 Then navigate using the links in the Navigation bar on the left side. Or press the ``Home`` button on your keyboard to come back to the top again. 
-As the docs are full of code samples and terminal outputs, it's best viewed on a laptop/desktop (i.e, any device that is not a handheld).
+As the docs are full of code samples and terminal outputs, it's best viewed on a laptop/desktop (i.e, any device that is bigger than a handheld).
 
 barterDEX Operation
 ^^^^^^^^^^^^^^^^^^^
