@@ -19,7 +19,7 @@ BarterDEX is a decentralized cryptocurrency exchange using atomic swaps to trade
 .. _developer:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Developer
 
    api
