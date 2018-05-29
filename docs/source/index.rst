@@ -4,12 +4,12 @@
 Welcome to BarterDEX's documentation!
 =====================================
 
-BarterDEX is a decentralized cryptocurrency exchange using atomic swaps to trade coin A directly with coin B, without needing to trust a third party.
+BarterDEX is a decentralized cryptocurrency exchange using atomic swaps to trade any coin A directly with another coin B, without needing to trust a third party. Users always maintain control of their private keys.
 
 .. _user-docs:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: User documentation
 
    faq
@@ -19,8 +19,9 @@ BarterDEX is a decentralized cryptocurrency exchange using atomic swaps to trade
 .. _developer:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: Developer
 
    api
+   api_summary
    whitepaper
