@@ -97,14 +97,7 @@ The ``userpass`` value is derived from the ``passphrase`` value, and in order to
 
 Let it load until you see a line that starts with ``>>>>>>>>>> DEX stats 127.0.0.1:7783``. This means the BarterDEX node is now up and running and that it's able to listen for commands.
 
-To obtain the ``userpass`` value, we need to execute the ``setpassphrase`` script. Open a new terminal window, navigate to the dexscripts folder and execute the ``setpassphrase`` script:
-
-.. code-block:: bash
-
-    cd ~/SuperNET/iguana/dexscripts
-    ./setpassphrase
-
-The response contains the ``userpass`` value. Copy this value and paste it in a newly created userpass file:
+To obtain the ``userpass`` value, you need to check the output in the terminal. Somewhere along these lines, you'll find: ``userpass.(a_long_line_of_random_numbers_and_letters)`` Copy this value and paste it in a newly created userpass file:
 
 .. code-block:: bash
 
