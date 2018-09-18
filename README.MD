@@ -1,6 +1,10 @@
-README!
 
-# Documentation for https://barterdexdocs.readthedocs.io
+
+# Deprecated
+
+Find all documentation @ https://docs.komodoplatform.com/
+
+-----
 
 PR's appreciated
 
